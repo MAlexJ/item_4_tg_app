@@ -21,9 +21,9 @@
    власний шрифт "Rozetka", тому тут системний фолбек).
    ========================================================================= */
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip}
 body{
-  margin:0;background:#fff;color:var(--black);
+  margin:0;overflow-x:hidden;overflow-x:clip;background:#fff;color:var(--black);
   font-family:'Inter',BlinkMacSystemFont,-apple-system,'Segoe UI',Arial,Roboto,Helvetica,sans-serif;
   font-size:14px;line-height:1.4;
   -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
@@ -104,8 +104,9 @@ svg{display:block}
 .search input::placeholder{color:var(--black-40)}
 .search__mic{color:var(--black-40);margin:0 12px;flex:0 0 auto}
 .search__mic:hover{color:var(--green)}
-.search__btn{height:40px;padding:0 26px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:var(--green);color:#fff;font-weight:600;flex:0 0 auto}
+.search__btn{height:40px;padding:0 26px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:var(--green);color:#fff;font-weight:600;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .search__btn:hover{background:var(--green-hover)}
+.search__btn-ico{display:none}
 .search__suggest{position:absolute;top:46px;left:0;right:0;background:#fff;border-radius:var(--radius);box-shadow:0 12px 40px rgba(0,0,0,.22);padding:8px;z-index:70;max-height:420px;overflow:auto}
 .sg-item{display:flex;gap:12px;align-items:center;padding:8px;border-radius:var(--radius-sm);cursor:pointer;color:var(--black)}
 .sg-item:hover{background:var(--black-5)}
@@ -351,14 +352,32 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
   .search__mic{display:none}
   .f-top{grid-template-columns:1fr 1fr}
   .hicon{width:40px}
+  .hdr__in{gap:8px}
 }
 @media(max-width:639px){
   .side__promos{grid-template-columns:1fr}
   .card__media{height:130px}
   .price{font-size:20px}
-  .search__btn{padding:0 16px}
+  .search__btn{padding:0 12px}
   .f-top{grid-template-columns:1fr}
   .strip{font-size:11px}
+  /* компактна шапка на телефонах */
+  .catalog-btn{display:none}
+  .hdr__actions .hicon:nth-child(2){display:none}
+  .search__ico{margin:0 6px 0 10px}
+  .hero__arrow{display:none}
+}
+@media(max-width:479px){
+  .hdr__in{gap:6px}
+  .burger{width:34px;height:34px}
+  .hicon{width:36px}
+  .search__btn{width:44px;padding:0}
+  .search__btn-txt{display:none}
+  .search__btn-ico{display:block}
+  .search__ico{margin:0 4px 0 8px}
+  .toasts{right:12px;bottom:140px}
+  .ai-pill{right:12px;bottom:80px}
+  .to-top{right:14px;bottom:20px}
 }
 </style>
 </head>
@@ -452,7 +471,7 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
       <svg class="i i--20 search__ico"><use href="#i-search"></use></svg>
       <input id="searchInput" type="search" placeholder="Я шукаю..." aria-label="Пошук товарів">
       <button type="button" class="search__mic" aria-label="Голосовий пошук"><svg class="i i--20"><use href="#i-mic"></use></svg></button>
-      <button class="search__btn" type="submit">Знайти</button>
+      <button class="search__btn" type="submit"><span class="search__btn-txt">Знайти</span><svg class="i i--20 search__btn-ico"><use href="#i-search"></use></svg></button>
       <div class="search__suggest" id="suggest" hidden></div>
     </form>
     <div class="hdr__actions">
