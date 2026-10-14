@@ -8,7 +8,7 @@ exports = async function(arg) {
     const now = new Date();
     const FOUR_HOURS_MS = 4 * 60 * 60 * 1000;
 
-    const db = context.services.get("Cluster0").db("item_4_tg_app_db");
+    const db = context.services.get("*Cluster0*").db("item_4_tg_app_db");
     const state = db.collection("trigger_lock_state");
     const errors = db.collection("trigger_error");
     const successes = db.collection("trigger_success");
