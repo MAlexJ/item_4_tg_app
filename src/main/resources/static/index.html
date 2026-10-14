@@ -273,7 +273,7 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
 /* ---------- 9b. Модалка входу (виміри з реального попапа) ---------- */
 .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
 .modal.is-on{display:flex}
-.modal__card{width:440px;max-width:100%;max-height:calc(100vh - 32px);overflow:auto;background:#fff;
+.modal__card{width:440px;max-width:100%;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;background:#fff;
   border-radius:var(--radius);box-shadow:0 16px 48px rgba(0,0,0,.3);animation:modalIn .18s ease}
 @keyframes modalIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .modal__head{display:flex;align-items:center;justify-content:space-between;padding:17px 20px;border-bottom:1px solid var(--black-10)}
@@ -366,6 +366,16 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
   .hdr__actions .hicon:nth-child(2){display:none}
   .search__ico{margin:0 6px 0 10px}
   .hero__arrow{display:none}
+  /* модалка входу на всю ширину */
+  .modal{padding:0}
+  .modal__card{width:100%;max-width:100%;max-height:100vh;max-height:100dvh;border-radius:0}
+  .modal__head{padding:14px 16px}
+  .modal__head h3{font-size:20px}
+  .modal__body{padding:18px 16px 24px}
+  /* плаваючі кнопки ближче до краю */
+  .ai-pill{right:16px;bottom:76px;padding:6px 12px 6px 6px;font-size:13px}
+  .ai-pill i{width:24px;height:24px;font-size:12px}
+  .to-top{right:18px;bottom:18px;width:40px;height:40px}
 }
 @media(max-width:479px){
   .hdr__in{gap:6px}
@@ -376,8 +386,9 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
   .search__btn-ico{display:block}
   .search__ico{margin:0 4px 0 8px}
   .toasts{right:12px;bottom:140px}
-  .ai-pill{right:12px;bottom:80px}
-  .to-top{right:14px;bottom:20px}
+  .ai-pill{right:12px;bottom:72px;padding:6px;border-radius:50%}
+  .ai-pill-txt{display:none}
+  .to-top{right:14px;bottom:16px}
 }
 </style>
 </head>
@@ -551,7 +562,7 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
   </div>
 </footer>
 
-<button class="ai-pill" type="button" data-ai><i>✦</i> Rozetka AI</button>
+<button class="ai-pill" type="button" data-ai><i>✦</i><span class="ai-pill-txt"> Rozetka AI</span></button>
 <button class="to-top" id="toTop" aria-label="Догори"><svg class="i"><use href="#i-up"></use></svg></button>
 
 <div class="overlay" id="overlay"></div>
