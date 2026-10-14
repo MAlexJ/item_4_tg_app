@@ -29,6 +29,7 @@ body{
   -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
 }
 img{max-width:100%;display:block}
+[hidden]{display:none!important}
 a{color:inherit;text-decoration:none}
 button,input{font:inherit;color:inherit}
 button{background:none;border:0;cursor:pointer;padding:0}
@@ -142,25 +143,21 @@ svg{display:block}
 .side-nav a.is-active .i{color:var(--black)}
 .side-block{margin-top:16px;padding-top:16px;border-top:1px solid var(--black-10)}
 .side-block h4{font-size:13px;font-weight:500;color:var(--black-60);margin-bottom:12px}
-.badges{display:flex;gap:8px;flex-wrap:wrap}
-.badge-app{display:flex;align-items:center;gap:8px;background:var(--black);color:#fff;border-radius:var(--radius-sm);padding:7px 12px;font-size:12px;font-weight:600;line-height:1.1}
-.badge-app em{font-style:normal;display:block;font-size:9px;opacity:.75;font-weight:400}
-.badge-app .i{width:18px;height:18px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+/* Офіційні бейджі App Store / Google Play — файли лежать у source/.
+   .badge-app__txt показується лише якщо картинка не завантажилась. */
+.badge-app{display:block;flex:0 0 auto}
+.badge-app img{display:block;height:40px;width:auto}
+.badge-app__txt{display:inline-block;background:var(--black);color:#fff;border-radius:var(--radius-sm);padding:9px 14px;font-size:12px;font-weight:600;line-height:1.2}
 .socials{display:flex;gap:6px;flex-wrap:wrap}
 .socials a{width:32px;height:32px;border-radius:var(--radius-sm);display:grid;place-items:center;color:var(--black-80)}
 .socials a:hover{background:var(--black-5);color:var(--green)}
 
 /* ---------- 4. Банер ---------- */
-.hero{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--green);aspect-ratio:1132/195;min-height:190px}
+.hero{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--green);aspect-ratio:1284/214}
 .hero__track{display:flex;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1)}
-.hero__slide{position:relative;flex:0 0 100%;display:flex;align-items:center;padding:0 64px;color:#fff;overflow:hidden}
-.hero__content{position:relative;z-index:2;max-width:620px}
-.hero__eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85;margin-bottom:6px}
-.hero h2{font-size:32px;line-height:1.1;font-weight:700;letter-spacing:-.5px}
-.hero__lead{margin-top:6px;font-size:14px;opacity:.92;max-width:520px}
-.hero__cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;height:40px;padding:0 22px;border-radius:var(--radius-sm);background:#fff;color:var(--black);font-weight:600;font-size:14px}
-.hero__cta:hover{background:var(--black-5)}
-.hero__art{position:absolute;right:-20px;top:0;height:100%;opacity:.9;z-index:1}
+.hero__slide{position:relative;flex:0 0 100%;display:block;overflow:hidden}
+.hero__img{width:100%;height:100%;object-fit:cover;display:block}
 .hero__arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--black);
   display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.18)}
 .hero__arrow:hover{color:var(--green)}
@@ -220,8 +217,8 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
 .f-col a:hover{color:var(--green)}
 .f-apps{display:flex;flex-direction:column;gap:8px;margin-top:12px;width:max-content}
 .f-qr{display:flex;gap:12px;align-items:flex-start;margin-top:12px}
-.f-qr__code{width:76px;height:76px;flex:0 0 auto;background:
-  repeating-conic-gradient(var(--black) 0% 25%,#fff 0% 50%) 0 0/12px 12px;border:4px solid #fff;outline:1px solid var(--black-10)}
+.f-qr__code{width:80px;height:80px;flex:0 0 auto;display:block}
+.f-qr__code img{width:100%;height:100%;display:block}
 .f-mid{margin-top:22px;padding-top:16px;border-top:1px solid var(--black-10);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .f-pay{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .f-pay span{padding:5px 10px;border:1px solid var(--black-10);border-radius:var(--radius-sm);font-size:11px;font-weight:700;color:var(--black-60)}
@@ -271,6 +268,57 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
 .mega-title{padding:14px 12px 6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--black-60);display:flex;align-items:center;gap:8px}
 .mega-item{padding:9px 12px;border-radius:var(--radius-sm);display:flex;align-items:center;gap:10px;font-size:14px;color:var(--black)}
 .mega-item:hover{background:var(--green-10);color:var(--green)}
+
+/* ---------- 9b. Модалка входу (виміри з реального попапа) ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.is-on{display:flex}
+.modal__card{width:440px;max-width:100%;max-height:calc(100vh - 32px);overflow:auto;background:#fff;
+  border-radius:var(--radius);box-shadow:0 16px 48px rgba(0,0,0,.3);animation:modalIn .18s ease}
+@keyframes modalIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.modal__head{display:flex;align-items:center;justify-content:space-between;padding:17px 20px;border-bottom:1px solid var(--black-10)}
+.modal__head h3{font-size:24px;font-weight:700;letter-spacing:-.3px}
+.modal__close{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--black);margin-right:-6px}
+.modal__close:hover{background:var(--black-5)}
+.modal__body{padding:22px 20px 24px}
+.field__label{display:block;font-size:14px;color:var(--black-60);margin-bottom:8px}
+.field__input{width:100%;height:40px;border:1px solid var(--black-10);border-radius:var(--radius-sm);padding:0 12px;font-size:16px;outline:0;color:var(--black)}
+.field__input:focus{border-color:var(--green)}
+.field__input.is-error{border-color:var(--red)}
+.field__error{margin-top:8px;font-size:12px;color:var(--red)}
+.btn-primary{width:100%;height:47px;border-radius:var(--radius-sm);background:var(--green);color:#fff;font-weight:600;font-size:16px;transition:background .15s}
+.btn-primary:hover{background:var(--green-hover)}
+.btn-primary[disabled]{background:var(--black-20);cursor:default}
+.auth__legal{margin-top:20px;font-size:12px;line-height:1.5;color:var(--black-60);text-align:center}
+.auth__legal a{color:var(--black-80);text-decoration:underline}
+.auth__or{position:relative;text-align:center;margin:22px 0 20px}
+.auth__or::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--black-10)}
+.auth__or span{position:relative;background:#fff;padding:0 14px;font-size:13px;color:var(--black-60)}
+.auth__prov{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:40px;margin-bottom:17px;
+  border:1px solid var(--black-20);border-radius:var(--radius-sm);font-size:14px;color:var(--black);transition:background .15s}
+.auth__prov:last-child{margin-bottom:0}
+.auth__prov:hover{background:var(--black-5)}
+.auth__prov .i{width:20px;height:20px;flex:0 0 auto}
+.auth__prov[disabled]{opacity:.6;cursor:default}
+.auth__more{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:18px;color:var(--blue);font-size:14px}
+.auth__more:hover{text-decoration:underline}
+.auth__more .i{transition:transform .2s}
+.auth__more.is-open .i{transform:rotate(180deg)}
+.auth__extra{display:grid;gap:17px;margin-top:18px}
+.auth__title{font-size:18px;font-weight:700;text-align:center;margin-bottom:6px}
+.auth__sub{font-size:13px;color:var(--black-60);text-align:center;line-height:1.5}
+.auth__sub b{color:var(--black);font-weight:600}
+.auth__resend{text-align:center;margin-top:16px}
+.auth__resend button{font-size:13px;color:var(--blue)}
+.auth__resend button:hover{text-decoration:underline}
+.auth__back{display:block;width:100%;margin-top:16px;font-size:13px;color:var(--black-60);text-align:center}
+.auth__back:hover{color:var(--green)}
+.auth__tg{text-align:center}
+.auth__tg>.i{width:56px;height:56px;margin:0 auto 14px}
+.auth__done{text-align:center;padding:8px 0}
+.auth__done .auth__check{width:60px;height:60px;border-radius:50%;background:var(--green-10);color:var(--green);
+  display:grid;place-items:center;margin:0 auto 16px}
+.auth__done .auth__check .i{width:30px;height:30px;stroke-width:2.4}
+.hicon.is-auth{color:var(--green)}
 .toasts{position:fixed;right:20px;bottom:150px;z-index:120;display:flex;flex-direction:column;gap:10px}
 .toast{display:flex;align-items:center;gap:10px;background:#fff;border-left:4px solid var(--green);border-radius:var(--radius-sm);
   box-shadow:0 12px 40px rgba(0,0,0,.2);padding:12px 16px;font-size:13px;font-weight:500;animation:tin .25s ease}
@@ -280,7 +328,6 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
 @media(max-width:1439px){
   :root{--pad:24px;--side:280px}
   .shelf{grid-template-columns:repeat(5,minmax(0,1fr))}
-  .hero h2{font-size:28px}
 }
 @media(max-width:1279px){
   :root{--side:250px}
@@ -295,16 +342,11 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
   .side__promos{grid-template-columns:1fr 1fr}
   .shelf{grid-template-columns:repeat(3,minmax(0,1fr))}
   .card{border-right:1px solid var(--black-10)}
-  .hero h2{font-size:24px}
   .catalog-btn span{display:none}
 }
 @media(max-width:767px){
   .shelf{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hero{aspect-ratio:16/9;min-height:0}
-  .hero__slide{padding:0 20px}
-  .hero h2{font-size:20px}
-  .hero__lead{display:none}
-  .hero__art{display:none}
+  /* співвідношення баннера не змінюємо: текст вшитий у картинку */
   .logo__text{display:none}
   .search__mic{display:none}
   .f-top{grid-template-columns:1fr 1fr}
@@ -371,10 +413,15 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.9" cy="7.1" r="1.1"/></symbol>
   <symbol id="i-yt" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5z"/></symbol>
   <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21 4.5L2.8 11.3l5.4 1.9 1.8 5.6 2.9-3.7 5 3.6z"/></symbol>
+  <!-- Бренд-іконки: контури з набору Simple Icons (ліцензія CC0), кольори — фірмові -->
+  <symbol id="i-google" viewBox="0 0 24 24"><path fill="#4285f4" stroke="none" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 01-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4z"/><path fill="#34a853" stroke="none" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0012 22z"/><path fill="#fbbc05" stroke="none" d="M6.4 14a6 6 0 010-3.8V7.6H3.1a10 10 0 000 8.9L6.4 14z"/><path fill="#ea4335" stroke="none" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 003.1 7.6l3.3 2.6C7.2 7.9 9.4 6.1 12 6.1z"/></symbol>
+  <symbol id="i-telegram" viewBox="0 0 24 24"><path fill="#229ed9" stroke="none" d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol>
+  <symbol id="i-gmail" viewBox="0 0 24 24"><path fill="#ea4335" stroke="none" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.7c0-.9.3-1.5 1.6-1.5h1.6V4.5c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2H7.5v3h2.3V21z"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></symbol>
   <symbol id="i-viber" viewBox="0 0 24 24"><path d="M12 2.5c5 0 9 3.4 9 7.6 0 4.2-4 7.6-9 7.6-.9 0-1.8-.1-2.6-.3L5 20l1-3.4c-1.8-1.4-3-3.4-3-6.1C3 5.9 7 2.5 12 2.5z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5"/></symbol>
-  <symbol id="i-apple" viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.2 1.2-2.4 1.3-2.5-.1 0-2.5-1-2.5-3.7zM14.3 5.6c.6-.8 1.1-1.9 1-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1 .1 2-.5 2.7-1.3z"/></symbol>
+  <symbol id="i-apple" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path d="M3.5 3.5v17l9.5-8.5zM14 10.5l3.8-3.4L6.3 2.9zM17.8 13.4L14 13.5l3.8 3.4 3-3.4zM6.3 21.1l11.5-4.2L14 13.5z"/></symbol>
 </defs></svg>
 
@@ -409,7 +456,7 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
       <div class="search__suggest" id="suggest" hidden></div>
     </form>
     <div class="hdr__actions">
-      <a class="hicon" href="https://rozetka.com.ua/ua/profile/" aria-label="Особистий кабінет"><svg class="i"><use href="#i-user"></use></svg></a>
+      <button class="hicon" data-open-auth aria-label="Особистий кабінет"><svg class="i"><use href="#i-user"></use></svg></button>
       <a class="hicon" href="https://rozetka.com.ua/ua/comparison/" aria-label="Списки порівнянь"><svg class="i"><use href="#i-compare"></use></svg><span class="hicon__badge hicon__badge--empty" data-compare-count></span></a>
       <button class="hicon" data-open-cart aria-label="Кошик"><svg class="i"><use href="#i-cart"></use></svg><span class="hicon__badge hicon__badge--empty" data-cart-count></span></button>
     </div>
@@ -433,8 +480,8 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
     <div class="side-block">
       <h4>Встановіть наші застосунки</h4>
       <div class="badges">
-        <a class="badge-app" href="https://rozetka.com.ua/ua/apps/"><svg class="i"><use href="#i-apple"></use></svg><span>App Store<em>Завантажити в</em></span></a>
-        <a class="badge-app" href="https://rozetka.com.ua/ua/apps/"><svg class="i"><use href="#i-play"></use></svg><span>Google Play<em>Завантажити в</em></span></a>
+        <a class="badge-app" href="https://rozetka.com.ua/ua/apps/" aria-label="Завантажити в App Store"><img src="source/appstore.svg" alt="Завантажити в App Store" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="badge-app__txt" hidden>App Store</span></a>
+        <a class="badge-app" href="https://rozetka.com.ua/ua/apps/" aria-label="Завантажити в Google Play"><img src="source/google-play.svg" alt="Завантажити в Google Play" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="badge-app__txt" hidden>Google Play</span></a>
       </div>
     </div>
     <div class="side-block">
@@ -511,6 +558,70 @@ footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding
 
 <div class="toasts" id="toasts" aria-live="polite"></div>
 
+<!-- Модалка входу: розміри та кольори зняті з реального попапа (440x509) -->
+<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-hidden="true">
+  <div class="modal__card">
+    <div class="modal__head">
+      <h3 id="authTitle">Вхід</h3>
+      <button class="modal__close" data-close-auth aria-label="Закрити">
+        <svg class="i i--20" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+
+      <!-- крок 1: номер телефону -->
+      <div data-auth-step="phone">
+        <label class="field__label" for="authPhone">Номер телефону</label>
+        <input class="field__input" id="authPhone" type="tel" value="+38" autocomplete="tel" inputmode="tel">
+        <p class="field__error" data-auth-error hidden></p>
+        <button class="btn-primary" style="margin-top:28px" data-auth-phone-submit>Продовжити</button>
+        <p class="auth__legal">Продовжуючи, ви підтверджуєте, що згодні увійти до
+          <a href="https://rozetka.com.ua/ua/profile/" >облікового запису Rozetka</a> та надаєте згоду на
+          <a href="https://rozetka.com.ua/ua/terms/">обробку персональних даних</a></p>
+        <div class="auth__or"><span>або</span></div>
+        <button class="auth__prov" data-auth-prov="Telegram"><svg class="i"><use href="#i-telegram"></use></svg>Продовжити через Telegram</button>
+        <button class="auth__more" data-auth-more>Інші способи авторизації <svg class="i i--16"><use href="#i-chevron"></use></svg></button>
+        <div class="auth__extra" hidden>
+          <button class="auth__prov" data-auth-prov="Apple"><svg class="i i--fill"><use href="#i-apple"></use></svg>Продовжити через Apple</button>
+          <button class="auth__prov" data-auth-email><svg class="i"><use href="#i-gmail"></use></svg>Увійти через електронну пошту</button>
+        </div>
+      </div>
+
+      <!-- крок: вхід через електронну пошту -->
+      <div data-auth-step="email" hidden>
+        <p class="auth__title">Вхід через електронну пошту</p>
+        <p class="auth__sub">Введіть адресу, на яку зареєстровано акаунт</p>
+        <label class="field__label" style="margin-top:18px" for="authEmail">Електронна пошта</label>
+        <input class="field__input" id="authEmail" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email">
+        <p class="field__error" data-auth-error hidden></p>
+        <button class="btn-primary" style="margin-top:20px" data-auth-email-submit>Продовжити</button>
+        <button class="auth__back" data-auth-back>← Назад до входу</button>
+      </div>
+
+      <!-- крок 2: перехід на ваш сервер для Telegram-авторизації -->
+      <div data-auth-step="telegram" hidden>
+        <div class="auth__tg">
+          <svg class="i"><use href="#i-telegram"></use></svg>
+          <p class="auth__title">Перенаправляємо на Telegram</p>
+          <p class="auth__sub">Зачекайте, зараз відкриється сторінка підтвердження входу.</p>
+        </div>
+      </div>
+
+      <!-- успіх -->
+      <div data-auth-step="done" hidden>
+        <div class="auth__done">
+          <span class="auth__check"><svg class="i"><use href="#i-check"></use></svg></span>
+          <p class="auth__title">Ви увійшли</p>
+          <p class="auth__sub" data-auth-done-sub>Вітаємо в особистому кабінеті Rozetka</p>
+        </div>
+        <button class="btn-primary" style="margin-top:22px" data-close-auth>Продовжити покупки</button>
+        <div class="auth__resend"><button data-auth-logout>Вийти з акаунта</button></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script>
 /* =========================================================================
    Демо-репліка головної сторінки rozetka.com.ua — один файл, без збірки.
@@ -526,7 +637,30 @@ var CONFIG = {
   lang: 'ua',
   /* Публічного API без ключа немає, прямий fetch ріже CORS.
      Підставте свій проксі — підказки пошуку почнуть брати живі дані. */
-  api: { enabled: false, endpoint: '', key: '' }
+  api: { enabled: false, endpoint: '', key: '' },
+
+  /* Авторизація — ваш сервер.
+     УВАГА, CORS: сторінка відкривається як file://, тому Origin = "null".
+     Сервер має повертати:
+       Access-Control-Allow-Origin: *        (або явно "null")
+       Access-Control-Allow-Methods: POST, OPTIONS
+       Access-Control-Allow-Headers: Content-Type
+     і обробляти preflight OPTIONS — запит із Content-Type: application/json
+     завжди викликає попередній OPTIONS, інакше браузер блокує POST.
+     Очікувані відповіді POST /login (коду з SMS немає — рішення ухвалює бекенд):
+       { "redirect": "https://..." }   -> переходимо за посиланням
+       { "ok": true } або { "token": "..." } -> вхід виконано одразу
+       { "message"/"error"/"detail": "..." } при помилці — покажемо користувачу
+     Для /login/tg достатньо редіректу: це звичайний перехід сторінки (GET),
+     тому CORS там не потрібен. Повертайтесь на returnUrl із
+     ?token=... / ?auth=ok / ?user=... — сторінка сама це підхопить. */
+  auth: {
+    base: 'https://item-4-tg-app.onrender.com',
+    loginPath: '/login',       // POST: { phone | email, method, returnUrl }
+    tgPath: '/login/tg',       // GET-перехід із ?returnUrl=
+    timeout: 20000,
+    enabled: true
+  }
 };
 function siteUrl(path) {
   if (/^https?:/i.test(path || '')) return path;
@@ -582,10 +716,15 @@ var CATALOG = [
   { title: 'Офіс, школа, книги', icon: 'c-clip', items: ['Книги', 'Канцелярія', 'Зошити', 'Рюкзаки', 'Творчість'] }
 ];
 
+/* Слайди головного банера. Текст вшитий у самі картинки (1284x214),
+   тому жодних текстових накладок — лише зображення.
+   href у кожного слайда можна замінити на конкретну акцію. */
 var SLIDES = [
-  { eyebrow: 'Тиждень техніки', title: 'Знижки до 50% на смартфони та ноутбуки', lead: 'Понад 10 000 товарів за акційними цінами та доставка по всій Україні', cta: 'Дивитись акції', href: PROMO_URL, bg: 'linear-gradient(115deg,#00893c 0%,#00a046 55%,#2ecc71 130%)' },
-  { eyebrow: 'RozetkaPay', title: 'Оплата частинами 0% на 8 платежів', lead: 'Оформлення онлайн за 2 хвилини, без довідок і прихованих комісій', cta: 'Оформити частинами', href: siteUrl('credit/'), bg: 'linear-gradient(115deg,#12233f 0%,#1f4f8f 55%,#2f9be0 130%)' },
-  { eyebrow: 'Все для дому', title: 'Затишок зі знижками до 40%', lead: 'Посуд, текстиль та освітлення, які роблять дім теплішим', cta: 'Обрати товари', href: siteUrl('tovary-dlya-doma/c2394287/'), bg: 'linear-gradient(115deg,#4a1f5c 0%,#a02a86 55%,#ff8a5c 130%)' }
+  { img: 'source/ngcontent-rz-client-1.webp', href: PROMO_URL, alt: 'Оформлюйте підписку SMART — підписка на SWEET.TV за 1 ₴', bg: 'linear-gradient(115deg,#7b2ff7,#f107a3)' },
+  { img: 'source/ngcontent-rz-client-2.webp', href: PROMO_URL, alt: 'Акційна пропозиція Rozetka', bg: 'linear-gradient(115deg,#12233f,#2f9be0)' },
+  { img: 'source/ngcontent-rz-client-3.webp', href: PROMO_URL, alt: 'Акційна пропозиція Rozetka', bg: 'linear-gradient(115deg,#065f34,#00a046)' },
+  { img: 'source/ngcontent-rz-client-4.webp', href: PROMO_URL, alt: 'The Singleton — цінуйте кожну мить, до -24%', bg: 'linear-gradient(115deg,#0d4d4a,#1f8f86)' },
+  { img: 'source/ngcontent-rz-client-5.webp', href: PROMO_URL, alt: 'Акційна пропозиція Rozetka', bg: 'linear-gradient(115deg,#4a1f5c,#a02a86)' }
 ];
 
 var PRODUCTS = [
@@ -697,7 +836,7 @@ function imgTag(p) {
 
 /* ----------------------------------------------------------------- 4. STATE */
 var STORE_KEY = 'fake-rozetka:v2';
-var state = { cart: {}, fav: {}, compare: {}, city: 'Київ', lang: 'ua' };
+var state = { cart: {}, fav: {}, compare: {}, city: 'Київ', lang: 'ua', auth: null, token: null };
 function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
 function load() {
   try {
@@ -705,6 +844,8 @@ function load() {
     if (s) {
       state.cart = s.cart || {}; state.fav = s.fav || {};
       state.compare = s.compare || {}; state.city = s.city || 'Київ'; state.lang = s.lang || 'ua';
+      state.auth = s.auth || null;
+      state.token = s.token || null;
     }
   } catch (e) {}
 }
@@ -727,19 +868,12 @@ function renderSideNav() {
 
 function renderHero() {
   $('#hero').innerHTML =
-    '<div class="hero__track" id="heroTrack">' + SLIDES.map(function (s) {
-      return '<div class="hero__slide" style="background:' + s.bg + '">' +
-        '<svg class="hero__art" viewBox="0 0 520 200" fill="none" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">' +
-        '<rect x="300" y="20" width="110" height="160" rx="22" fill="rgba(255,255,255,.22)"/>' +
-        '<rect x="190" y="55" width="90" height="125" rx="18" fill="rgba(255,255,255,.16)"/>' +
-        '<circle cx="440" cy="60" r="52" fill="rgba(255,255,255,.14)"/>' +
-        '</svg>' +
-        '<div class="hero__content">' +
-        '<span class="hero__eyebrow">' + esc(s.eyebrow) + '</span>' +
-        '<h2>' + esc(s.title) + '</h2>' +
-        '<p class="hero__lead">' + esc(s.lead) + '</p>' +
-        '<a class="hero__cta" href="' + s.href + '">' + esc(s.cta) + ico('i-right', 'i--18') + '</a>' +
-        '</div></div>';
+    '<div class="hero__track" id="heroTrack">' + SLIDES.map(function (s, i) {
+      return '<a class="hero__slide" style="background:' + s.bg + '" href="' + s.href + '" data-slide-img="' + i + '">' +
+        '<img class="hero__img" src="' + s.img + '" alt="' + esc(s.alt) + '" width="1284" height="214"' +
+        (i ? ' loading="lazy"' : ' fetchpriority="high"') +
+        ' onerror="this.style.display=\'none\'">' +
+        '</a>';
     }).join('') + '</div>' +
     '<button class="hero__arrow hero__arrow--prev" data-slide-prev aria-label="Попередній банер">' + ico('i-left', 'i--20') + '</button>' +
     '<button class="hero__arrow hero__arrow--next" data-slide-next aria-label="Наступний банер">' + ico('i-right', 'i--20') + '</button>' +
@@ -782,9 +916,9 @@ function renderFooter() {
       return '<a href="' + s[1] + '" aria-label="' + s[0] + '">' + ico(s[0], 'i--20') + '</a>';
     }).join('') + '</div>' +
     '<h4 style="margin-top:18px">Скануйте QR-код та встановлюйте застосунки</h4>' +
-    '<div class="f-qr"><span class="f-qr__code"></span><span class="f-apps">' +
-    '<a class="badge-app" href="' + siteUrl('apps/') + '"><svg class="i"><use href="#i-apple"></use></svg><span>App Store<em>Завантажити в</em></span></a>' +
-    '<a class="badge-app" href="' + siteUrl('apps/') + '"><svg class="i"><use href="#i-play"></use></svg><span>Google Play<em>Завантажити в</em></span></a>' +
+    '<div class="f-qr"><span class="f-qr__code"><img src="source/qr-code.png" alt="QR-код застосунку Rozetka" width="80" height="80"></span><span class="f-apps">' +
+    '<a class="badge-app" href="' + siteUrl('apps/') + '" aria-label="Завантажити в App Store"><img src="source/appstore.svg" alt="Завантажити в App Store" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="badge-app__txt" hidden>App Store</span></a>' +
+    '<a class="badge-app" href="' + siteUrl('apps/') + '" aria-label="Завантажити в Google Play"><img src="source/google-play.svg" alt="Завантажити в Google Play" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="badge-app__txt" hidden>Google Play</span></a>' +
     '</span></div></div>';
   $('#footCols').innerHTML = first + FOOTER.map(function (col) {
     return '<div class="f-col"><h4>' + esc(col.title) + '</h4><ul>' + col.links.map(function (l) {
@@ -863,7 +997,7 @@ function closeDrawers() {
   overlay.classList.remove('is-on');
   document.body.style.overflow = '';
 }
-overlay.addEventListener('click', closeDrawers);
+overlay.addEventListener('click', function () { closeDrawers(); closeAuth(); });
 
 /* Банер */
 var slide = 0, timer = null;
@@ -873,10 +1007,10 @@ function goSlide(i) {
   if (track) track.style.transform = 'translateX(-' + (slide * 100) + '%)';
   $$('.hero__dot').forEach(function (d, n) { d.classList.toggle('is-active', n === slide); });
 }
-function autoSlide() { clearInterval(timer); timer = setInterval(function () { goSlide(slide + 1); }, 6000); }
-var heroEl = $('#hero');
-heroEl.addEventListener('mouseenter', function () { clearInterval(timer); });
-heroEl.addEventListener('mouseleave', autoSlide);
+function autoSlide() { clearInterval(timer); timer = setInterval(function () { goSlide(slide + 1); }, 4000); }
+/* Автопрокрутка працює завжди. Раніше банер ставав на паузу при наведенні,
+   але Chrome надсилає mouseenter одразу після завантаження, якщо курсор
+   випадково стоїть над банером — і карусель застигала назавжди. */
 autoSlide();
 
 /* Пошук */
@@ -915,6 +1049,180 @@ $('#searchForm').addEventListener('submit', function (e) {
   hideSuggest();
 });
 
+/* ---------------------------------------------------- 7b. Вхід / реєстрація */
+var authModal = $('#authModal');
+var auth = { step: 'phone' };
+
+function authStep(name) {
+  auth.step = name;
+  $$('[data-auth-step]').forEach(function (el) { el.hidden = el.getAttribute('data-auth-step') !== name; });
+  var err = $('[data-auth-step="' + name + '"] [data-auth-error]');
+  if (err) err.hidden = true;
+  var first = $('[data-auth-step="' + name + '"] input');
+  if (first) setTimeout(function () { first.focus(); }, 60);
+}
+function authError(msg) {
+  var err = $('[data-auth-step="' + auth.step + '"] [data-auth-error]');
+  if (err) { err.textContent = msg; err.hidden = false; }
+}
+
+/* ---- запити до вашого сервера авторизації ---- */
+function authUrl(path) { return CONFIG.auth.base + path; }
+
+function apiCall(path, body) {
+  var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+  var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, CONFIG.auth.timeout) : null;
+  return fetch(authUrl(path), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+    signal: ctrl ? ctrl.signal : undefined
+  }).then(function (r) {
+    if (timer) clearTimeout(timer);
+    return r.text().then(function (t) {
+      var data = {};
+      try { data = t ? JSON.parse(t) : {}; } catch (e) { data = { raw: t }; }
+      if (!r.ok) {
+        var err = new Error((data && (data.message || data.error || data.detail)) || ('HTTP ' + r.status));
+        err.data = data;
+        throw err;
+      }
+      return data;
+    });
+  }, function (e) {
+    if (timer) clearTimeout(timer);
+    throw new Error(e && e.name === 'AbortError' ? 'перевищено час очікування' : 'запит заблоковано (CORS) або сервер недоступний');
+  });
+}
+
+function btnBusy(btn, text) {
+  if (!btn) return;
+  if (text) {
+    if (!btn.dataset.label) btn.dataset.label = btn.textContent;
+    btn.textContent = text;
+    btn.disabled = true;
+  } else {
+    if (btn.dataset.label) btn.textContent = btn.dataset.label;
+    btn.disabled = false;
+  }
+}
+
+function submitPhone() {
+  var phone = $('#authPhone').value;
+  if (phoneDigits().length !== 10) {
+    $('#authPhone').classList.add('is-error');
+    authError('Введіть номер у форматі +38 (0XX) XXX-XX-XX');
+    return;
+  }
+  var btn = $('[data-auth-phone-submit]');
+  btnBusy(btn, 'Надсилаємо…');
+  apiCall(CONFIG.auth.loginPath, { phone: phone.replace(/[^\d+]/g, ''), method: 'phone', returnUrl: location.href })
+    .then(function (res) {
+      btnBusy(btn, null);
+      if (res && res.redirect) { location.href = res.redirect; return; }
+      if (res && res.token) state.token = res.token;
+      authDone('телефоном ' + phone);
+    })
+    .catch(function (err) {
+      btnBusy(btn, null);
+      authError('Не вдалося увійти: ' + err.message);
+    });
+}
+
+function submitEmail() {
+  var email = ($('#authEmail').value || '').trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    $('#authEmail').classList.add('is-error');
+    authError('Введіть коректну адресу електронної пошти');
+    return;
+  }
+  var btn = $('[data-auth-email-submit]');
+  btnBusy(btn, 'Надсилаємо…');
+  apiCall(CONFIG.auth.loginPath, { email: email, method: 'email', returnUrl: location.href })
+    .then(function (res) {
+      btnBusy(btn, null);
+      if (res && res.redirect) { location.href = res.redirect; return; }
+      authDone('електронною поштою');
+    })
+    .catch(function (err) {
+      btnBusy(btn, null);
+      authError('Не вдалося увійти: ' + err.message);
+    });
+}
+
+function goTelegram() {
+  authStep('telegram');
+  var url = authUrl(CONFIG.auth.tgPath) + '?returnUrl=' + encodeURIComponent(location.href);
+  setTimeout(function () { location.href = url; }, 450);
+}
+
+/* Повернення з вашого сервера: ?token=... / ?auth=ok / ?user=... / ?error=... */
+function checkAuthReturn() {
+  if (!location.search) return;
+  var p = new URLSearchParams(location.search);
+  var err = p.get('error') || p.get('auth_error');
+  var token = p.get('token') || p.get('auth_token') || p.get('access_token');
+  var ok = p.get('auth') === 'ok' || p.get('status') === 'ok';
+  var user = p.get('user') || p.get('name') || p.get('phone');
+  if (!err && !token && !ok && !user) return;
+  try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  if (err) { toast('Помилка входу: ' + decodeURIComponent(err)); return; }
+  state.auth = user || 'обліковий запис';
+  if (token) state.token = token;
+  save();
+  $$('[data-open-auth]').forEach(function (b) { b.classList.add('is-auth'); });
+  openAuth();
+  toast('Вхід виконано');
+}
+function openAuth() {
+  authModal.classList.add('is-on');
+  authModal.setAttribute('aria-hidden', 'false');
+  overlay.classList.add('is-on');
+  document.body.style.overflow = 'hidden';
+  authStep(state.auth ? 'done' : 'phone');
+  if (state.auth) {
+    $('[data-auth-done-sub]').innerHTML = 'Ви увійшли через <b>' + esc(state.auth) + '</b>';
+  } else {
+    var inp = $('#authPhone');
+    if (inp) inp.value = '+38';
+  }
+}
+function closeAuth() {
+  authModal.classList.remove('is-on');
+  authModal.setAttribute('aria-hidden', 'true');
+  if (!$$('.drawer.is-on').length) { overlay.classList.remove('is-on'); document.body.style.overflow = ''; }
+}
+function authDone(method) {
+  state.auth = method; save();
+  $$('[data-open-auth]').forEach(function (b) { b.classList.add('is-auth'); });
+  $('[data-auth-done-sub]').innerHTML = 'Ви увійшли через <b>' + esc(method) + '</b>';
+  authStep('done');
+  toast('Вхід виконано: ' + method);
+}
+
+/* маска +38 (0XX) XXX-XX-XX */
+function formatPhone(v) {
+  var d = (v || '').replace(/\D/g, '');
+  if (d.indexOf('38') === 0) d = d.slice(2);
+  d = d.slice(0, 10);
+  var out = '+38';
+  if (d.length) out += ' (' + d.slice(0, 3);
+  if (d.length >= 3) out += ')';
+  if (d.length > 3) out += ' ' + d.slice(3, 6);
+  if (d.length > 6) out += '-' + d.slice(6, 8);
+  if (d.length > 8) out += '-' + d.slice(8, 10);
+  return out;
+}
+function phoneDigits() { return ($('#authPhone').value.replace(/\D/g, '') || '').replace(/^38/, ''); }
+
+$('#authPhone').addEventListener('input', function () {
+  var pos = this.value.length;
+  this.value = formatPhone(this.value);
+  this.classList.remove('is-error');
+  var err = $('[data-auth-step="phone"] [data-auth-error]');
+  if (err) err.hidden = true;
+});
+
 /* Делеговані кліки */
 document.addEventListener('click', function (e) {
   var t = e.target, hit;
@@ -949,6 +1257,32 @@ document.addEventListener('click', function (e) {
   if (t.closest('[data-close-drawers]')) { closeDrawers(); return; }
   if (t.closest('[data-ai]')) { toast('Rozetka AI — демо-кнопка'); return; }
 
+  /* --- вхід --- */
+  if (t.closest('[data-open-auth]')) { openAuth(); return; }
+  if (t.closest('[data-close-auth]')) { closeAuth(); return; }
+  if (t.closest('[data-auth-back]')) { authStep('phone'); return; }
+  if (t.closest('[data-auth-more]')) {
+    var more = t.closest('[data-auth-more]'), extra = $('.auth__extra');
+    extra.hidden = !extra.hidden;
+    more.classList.toggle('is-open', !extra.hidden);
+    return;
+  }
+  if (t.closest('[data-auth-phone-submit]')) { submitPhone(); return; }
+  if (t.closest('[data-auth-logout]')) {
+    delete state.auth; delete state.token; save();
+    $$('[data-open-auth]').forEach(function (b) { b.classList.remove('is-auth'); });
+    authStep('phone'); toast('Ви вийшли з акаунта');
+    return;
+  }
+  if ((hit = t.closest('[data-auth-prov]'))) {
+    var prov = hit.getAttribute('data-auth-prov');
+    if (prov === 'Telegram') { goTelegram(); return; }
+    toast('Вхід через ' + prov + ' поки не підключено — є телефон, Telegram і пошта');
+    return;
+  }
+  if (t.closest('[data-auth-email]')) { $('#authEmail').value = ''; authStep('email'); return; }
+  if (t.closest('[data-auth-email-submit]')) { submitEmail(); return; }
+
   if ((hit = t.closest('[data-city]'))) {
     state.city = hit.getAttribute('data-city'); save();
     $$('[data-city-name]').forEach(function (n) { n.textContent = state.city; });
@@ -976,7 +1310,7 @@ window.addEventListener('scroll', function () {
 toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
 document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') { closeDrawers(); hideSuggest(); }
+  if (e.key === 'Escape') { closeDrawers(); closeAuth(); hideSuggest(); }
   if (e.key === '/' && document.activeElement !== sInput) { e.preventDefault(); sInput.focus(); }
 });
 
@@ -984,8 +1318,10 @@ document.addEventListener('keydown', function (e) {
 load();
 renderSideNav(); renderHero(); renderShelves(); renderFooter(); renderCatalog(); renderCities();
 renderCart(); renderBadges(); goSlide(0);
+if (state.auth) $$('[data-open-auth]').forEach(function (b) { b.classList.add('is-auth'); });
+checkAuthReturn();
 
-window.RZ = { CONFIG: CONFIG, state: state, products: PRODUCTS, searchUrl: searchUrl, siteUrl: siteUrl, api: fetchRemoteProducts, toast: toast, cartTotal: cartTotal };
+window.RZ = { CONFIG: CONFIG, state: state, products: PRODUCTS, searchUrl: searchUrl, siteUrl: siteUrl, api: fetchRemoteProducts, toast: toast, cartTotal: cartTotal, auth: { open: openAuth, phone: submitPhone, email: submitEmail, telegram: goTelegram } };
 })();
 
 </script>
