@@ -21,3 +21,9 @@ spring:
     - classpath:mongodb.yaml
     - classpath:telegram.yaml
     - classpath:management.yaml
+
+# CORS allow-list for the /login endpoints.
+cors:
+  # Comma-separated list of allowed origins, e.g. "https://app.example.com,https://www.example.com".
+  # "*" = allow any origin (default). Add "null" if you also open index.html from disk (file://).
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:*}

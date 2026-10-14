@@ -655,7 +655,9 @@ var CONFIG = {
      тому CORS там не потрібен. Повертайтесь на returnUrl із
      ?token=... / ?auth=ok / ?user=... — сторінка сама це підхопить. */
   auth: {
-    base: 'https://item-4-tg-app.onrender.com',
+    // Коли сторінку роздає цей самий сервер (http/https) — same-origin, CORS не потрібен.
+    // Абсолютний URL використовуємо лише коли файл відкрито з диска (file://, Origin: null).
+    base: location.protocol === 'file:' ? 'https://item-4-tg-app.onrender.com' : '',
     loginPath: '/login',       // POST: { phone | email, method, returnUrl }
     tgPath: '/login/tg',       // GET-перехід із ?returnUrl=
     timeout: 20000,
