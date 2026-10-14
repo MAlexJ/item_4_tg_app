@@ -27,3 +27,7 @@ cors:
   # Comma-separated list of allowed origins, e.g. "https://app.example.com,https://www.example.com".
   # "*" = allow any origin (default). Add "null" if you also open index.html from disk (file://).
   allowed-origins: ${CORS_ALLOWED_ORIGINS:*}
+
+# Public base URL of this service, used as the Telegram Login Widget origin / return_to.
+app:
+  public-url: ${APP_PUBLIC_URL:https://item-4-tg-app.onrender.com}
