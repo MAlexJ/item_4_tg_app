@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Інтернет-магазин ROZETKA: офіційний сайт онлайн-гіпермаркету</title>
+<meta name="description" content="Демо-репліка головної сторінки онлайн-гіпермаркету: каталог, акції, рекомендації, кошик, пошук.">
+<meta name="theme-color" content="#221f1f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="https://content1.rozetka.com.ua/logo/site_mini_logo/original/559597093.svg">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2300a046'/%3E%3Cellipse cx='10.6' cy='12.6' rx='2.5' ry='3.3' fill='%23221f1f'/%3E%3Cpath d='M17.6 12.4c1.7-2.2 3.9-2.7 6.1-1.5' fill='none' stroke='%23221f1f' stroke-width='2.3' stroke-linecap='round'/%3E%3Cpath d='M7.4 17.2h17.2a8.6 8.6 0 0 1-17.2 0z' fill='%23221f1f'/%3E%3Ccircle cx='12.4' cy='21.8' r='3' fill='%2300a046'/%3E%3C/svg%3E">
+<style>
+/* =========================================================================
+   Дизайн-токени знято з реального сайту (виміри по скриншоту + CSS-змінні):
+   чорний #221f1f, зелений #00a046 / hover #00bc52, green-10 #e5f5ec,
+   червоний #f84147, блідо-жовтий стрічки #fffac6, активний пункт #ffff00,
+   межі #e9e9e9 / #d2d2d2, приглушений #797878 / #a6a5a5, синій #3e77aa,
+   радіуси 8px (блоки) і 4px (кнопки), базова гарнітура Inter (у оригіналі —
+   власний шрифт "Rozetka", тому тут системний фолбек).
+   ========================================================================= */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:#fff;color:var(--black);
+  font-family:'Inter',BlinkMacSystemFont,-apple-system,'Segoe UI',Arial,Roboto,Helvetica,sans-serif;
+  font-size:14px;line-height:1.4;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer;padding:0}
+ul{margin:0;padding:0;list-style:none}
+h1,h2,h3,h4,p{margin:0}
+svg{display:block}
+
+:root{
+  --black:#221f1f;
+  --black-80:#4d4b4b;
+  --black-60:#797878;
+  --black-40:#a6a5a5;
+  --black-20:#d2d2d2;
+  --black-10:#e9e9e9;
+  --black-5:#f5f5f5;
+  --green:#00a046;
+  --green-hover:#00bc52;
+  --green-10:#e5f5ec;
+  --green-5:#f4faf6;
+  --red:#f84147;
+  --red-5:#ffeced;
+  --blue:#3e77aa;
+  --strip:#fffac6;
+  --soft-yellow:#fefce7;
+  --active:#ffff00;
+  --focus:#6fc4e5;
+  --radius:8px;
+  --radius-sm:4px;
+  --container:1600px;
+  --pad:32px;
+  --side:310px;
+  --hdr-h:56px;
+}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding:0 var(--pad)}
+.i{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.i--fill{fill:currentColor;stroke:none}
+.i-fill{fill:currentColor;stroke:none}
+.i--14{width:14px;height:14px}
+.i--16{width:16px;height:16px}
+.i--18{width:18px;height:18px}
+.i--20{width:20px;height:20px}
+.i--28{width:28px;height:28px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.skip{position:absolute;left:-9999px;top:0;background:#fff;padding:10px 16px;z-index:999}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:0;box-shadow:0 0 0 2px var(--focus)}
+
+/* ---------- 1. Верхня промо-стрічка ---------- */
+.strip{background:#fffac6;color:var(--black);min-height:38px;display:flex;align-items:center;justify-content:center;padding:3px 16px}
+.strip__link{display:flex;align-items:center;justify-content:center;width:100%}
+.strip img{display:block;width:736px;max-width:100%;height:auto}
+.strip__mark{display:inline-flex;align-items:center;gap:6px;font-weight:800}
+.strip__mark i{display:block;width:26px;height:16px;border-radius:3px;background:var(--green);color:#fff;font-size:10px;font-style:normal;font-weight:800;line-height:16px;text-align:center;letter-spacing:0}
+.strip__text{font-size:13px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;text-align:center}
+
+/* ---------- 2. Шапка ---------- */
+.hdr{background:var(--black);position:sticky;top:0;z-index:60;transition:box-shadow .2s}
+.hdr.is-stuck{box-shadow:0 6px 18px rgba(0,0,0,.28)}
+.hdr__in{display:flex;align-items:center;gap:14px;height:var(--hdr-h)}
+.burger{color:#fff;width:38px;height:38px;border-radius:var(--radius-sm);display:grid;place-items:center;flex:0 0 auto}
+.burger:hover{background:rgba(255,255,255,.12)}
+.logo{display:flex;align-items:center;gap:10px;flex:0 0 auto;color:#fff}
+.logo__mark{width:36px;height:36px;flex:0 0 auto}
+.logo__mark svg,.logo__mark img{width:36px;height:36px;display:block}
+.logo__text{font-size:25px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;line-height:1}
+.catalog-btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:var(--radius);
+  background:#fff;color:var(--black);font-weight:500;font-size:14px;white-space:nowrap;flex:0 0 auto;transition:background .15s}
+.catalog-btn:hover{background:var(--black-5)}
+.search{position:relative;flex:1;min-width:120px;display:flex;align-items:center;height:40px;background:#fff;border-radius:var(--radius-sm)}
+.search__ico{color:var(--black-40);margin:0 10px 0 14px;flex:0 0 auto}
+.search input{flex:1;border:0;outline:0;background:none;height:100%;min-width:0;font-size:14px}
+.search input::placeholder{color:var(--black-40)}
+.search__mic{color:var(--black-40);margin:0 12px;flex:0 0 auto}
+.search__mic:hover{color:var(--green)}
+.search__btn{height:40px;padding:0 26px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:var(--green);color:#fff;font-weight:600;flex:0 0 auto}
+.search__btn:hover{background:var(--green-hover)}
+.search__suggest{position:absolute;top:46px;left:0;right:0;background:#fff;border-radius:var(--radius);box-shadow:0 12px 40px rgba(0,0,0,.22);padding:8px;z-index:70;max-height:420px;overflow:auto}
+.sg-item{display:flex;gap:12px;align-items:center;padding:8px;border-radius:var(--radius-sm);cursor:pointer;color:var(--black)}
+.sg-item:hover{background:var(--black-5)}
+.sg-item img{width:40px;height:40px;border-radius:var(--radius-sm);object-fit:contain;background:var(--black-5)}
+.sg-item b{display:block;font-weight:400;font-size:13px}
+.sg-item span{font-size:13px;color:var(--green);font-weight:700}
+.sg-all{padding:8px;font-size:13px;color:var(--green);font-weight:600}
+.hdr__actions{display:flex;align-items:center;gap:2px;flex:0 0 auto}
+.hicon{position:relative;width:46px;height:38px;border-radius:var(--radius-sm);display:grid;place-items:center;color:#fff}
+.hicon:hover{background:rgba(255,255,255,.12)}
+.hicon__badge{position:absolute;top:1px;right:3px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--green);color:#fff;
+  font-size:10px;font-weight:700;line-height:16px;text-align:center}
+.hicon__badge--empty{display:none}
+
+/* ---------- 3. Каркас: сайдбар + контент ---------- */
+.layout{display:grid;grid-template-columns:var(--side) minmax(0,1fr);gap:24px;align-items:start;padding-top:16px;padding-bottom:40px}
+.side{position:sticky;top:calc(var(--hdr-h) + 16px)}
+.side__promos{display:grid;gap:0;margin-bottom:12px;border:1px solid var(--black-10)}
+.side-promo{display:flex;gap:12px;align-items:center;padding:16px 14px;transition:filter .15s}
+.side-promo+.side-promo{border-top:1px solid var(--black-10)}
+.side-promo:hover{filter:brightness(.97)}
+.side-promo--green{background:var(--green-10)}
+.side-promo--yellow{background:var(--soft-yellow)}
+.side-promo__mark{display:block;flex:0 0 auto}
+.side-promo__mark img{display:block;width:100%;height:100%;object-fit:contain}
+.side-promo__mark--card{width:32px;height:22px}
+.side-promo__mark--smart{width:32px;height:32px}
+.side-promo b{display:block;font-size:14px;font-weight:600;line-height:1.25}
+.side-promo span{display:block;font-size:12px;color:var(--black-60);margin-top:2px}
+.side-nav{padding:4px 0}
+.side-nav a{display:flex;align-items:center;gap:12px;padding:7px 12px;border-radius:var(--radius);font-size:14px;color:var(--black);transition:background .13s}
+.side-nav a:hover{background:var(--black-5)}
+.side-nav a.is-active{background:var(--active);font-weight:500}
+.side-nav .i{color:var(--black-80);flex:0 0 20px}
+.side-nav a.is-active .i{color:var(--black)}
+.side-block{margin-top:16px;padding-top:16px;border-top:1px solid var(--black-10)}
+.side-block h4{font-size:13px;font-weight:500;color:var(--black-60);margin-bottom:12px}
+.badges{display:flex;gap:8px;flex-wrap:wrap}
+.badge-app{display:flex;align-items:center;gap:8px;background:var(--black);color:#fff;border-radius:var(--radius-sm);padding:7px 12px;font-size:12px;font-weight:600;line-height:1.1}
+.badge-app em{font-style:normal;display:block;font-size:9px;opacity:.75;font-weight:400}
+.badge-app .i{width:18px;height:18px}
+.socials{display:flex;gap:6px;flex-wrap:wrap}
+.socials a{width:32px;height:32px;border-radius:var(--radius-sm);display:grid;place-items:center;color:var(--black-80)}
+.socials a:hover{background:var(--black-5);color:var(--green)}
+
+/* ---------- 4. Банер ---------- */
+.hero{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--green);aspect-ratio:1132/195;min-height:190px}
+.hero__track{display:flex;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.hero__slide{position:relative;flex:0 0 100%;display:flex;align-items:center;padding:0 64px;color:#fff;overflow:hidden}
+.hero__content{position:relative;z-index:2;max-width:620px}
+.hero__eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85;margin-bottom:6px}
+.hero h2{font-size:32px;line-height:1.1;font-weight:700;letter-spacing:-.5px}
+.hero__lead{margin-top:6px;font-size:14px;opacity:.92;max-width:520px}
+.hero__cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;height:40px;padding:0 22px;border-radius:var(--radius-sm);background:#fff;color:var(--black);font-weight:600;font-size:14px}
+.hero__cta:hover{background:var(--black-5)}
+.hero__art{position:absolute;right:-20px;top:0;height:100%;opacity:.9;z-index:1}
+.hero__arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--black);
+  display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.hero__arrow:hover{color:var(--green)}
+.hero__arrow--prev{left:16px}
+.hero__arrow--next{right:16px}
+.hero__dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5}
+.hero__dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5)}
+.hero__dot.is-active{background:#fff}
+.hero__foot{display:flex;justify-content:flex-end;margin-top:10px}
+.hero__foot a{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--black)}
+.hero__foot a:hover{color:var(--green)}
+
+/* ---------- 5. Секції та полиці товарів ---------- */
+.block{margin-top:24px}
+.block__title{font-size:20px;font-weight:700;letter-spacing:-.2px;margin-bottom:12px}
+.shelf{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));background:#fff;border-radius:var(--radius)}
+.card{position:relative;display:flex;flex-direction:column;padding:12px 14px 16px;border-right:1px solid var(--black-10);transition:box-shadow .18s,transform .18s;background:#fff}
+.card:last-child{border-right:0}
+.card:hover{box-shadow:0 4px 20px rgba(0,0,0,.13);transform:translateY(-2px);z-index:2}
+.card__fav{position:absolute;top:12px;right:12px;z-index:3;color:var(--blue)}
+.card__fav:hover,.card__fav.is-on{color:var(--red)}
+.card__media{display:block;height:190px;margin:4px 0 12px}
+.card__media img{width:100%;height:100%;object-fit:contain;transition:transform .25s}
+.card:hover .card__media img{transform:scale(1.04)}
+.card__title{font-size:14px;line-height:1.35;color:var(--black);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
+.card:hover .card__title{color:var(--green)}
+.card__old{font-size:13px;color:var(--red);text-decoration:line-through;margin-top:8px;min-height:18px}
+.card__row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:2px}
+.price{font-size:24px;font-weight:700;color:var(--black);letter-spacing:-.4px;white-space:nowrap}
+.card__cart{width:34px;height:34px;border-radius:var(--radius-sm);display:grid;place-items:center;color:var(--green);flex:0 0 auto}
+.card__cart:hover{background:var(--green-10)}
+.card__cart.is-in{background:var(--green);color:#fff}
+.card__chips{margin-top:8px}
+.chip{display:inline-block;padding:2px 6px;border-radius:var(--radius-sm);background:var(--green-10);color:var(--green);font-size:11px;font-weight:500}
+.card__delivery{margin-top:8px;font-size:12px;color:var(--green);display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:18px}
+.card__delivery .smart{display:inline-block;background:var(--green);color:#fff;font-size:9px;font-weight:800;letter-spacing:.06em;padding:2px 4px;border-radius:2px}
+.card__delivery.is-off{color:var(--black-60)}
+.card__delivery.is-off .smart{background:var(--black-40)}
+.more{display:grid;place-items:center;margin-top:24px}
+.more button{height:48px;padding:0 26px;border-radius:var(--radius-sm);background:var(--green);color:#fff;font-weight:600;display:inline-flex;align-items:center;gap:10px}
+.more button:hover{background:var(--green-hover)}
+
+/* ---------- 6. SEO-текст ---------- */
+.seo{margin-top:36px;color:var(--black);font-size:14px;line-height:1.5}
+.seo h2{font-size:20px;font-weight:700;margin-bottom:10px}
+.seo h3{font-size:16px;font-weight:700;margin:18px 0 8px}
+.seo p+p{margin-top:8px}
+.seo a{color:var(--blue)}
+.seo__more{display:inline-flex;align-items:center;gap:6px;color:var(--blue);margin-top:10px}
+
+/* ---------- 7. Футер ---------- */
+footer{border-top:2px solid var(--green);background:#fff;margin-top:40px;padding:26px 0 20px}
+.f-top{display:grid;grid-template-columns:1.1fr repeat(4,.85fr);gap:28px}
+.f-col h4{font-size:13px;font-weight:400;color:var(--black-60);margin-bottom:14px}
+.f-col li+li{margin-top:10px}
+.f-col a{font-size:14px;color:var(--black)}
+.f-col a:hover{color:var(--green)}
+.f-apps{display:flex;flex-direction:column;gap:8px;margin-top:12px;width:max-content}
+.f-qr{display:flex;gap:12px;align-items:flex-start;margin-top:12px}
+.f-qr__code{width:76px;height:76px;flex:0 0 auto;background:
+  repeating-conic-gradient(var(--black) 0% 25%,#fff 0% 50%) 0 0/12px 12px;border:4px solid #fff;outline:1px solid var(--black-10)}
+.f-mid{margin-top:22px;padding-top:16px;border-top:1px solid var(--black-10);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.f-pay{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.f-pay span{padding:5px 10px;border:1px solid var(--black-10);border-radius:var(--radius-sm);font-size:11px;font-weight:700;color:var(--black-60)}
+.f-bot{margin-top:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--black-60);font-size:12px}
+
+/* ---------- 8. Плаваючі елементи ---------- */
+.ai-pill{position:fixed;right:22px;bottom:84px;z-index:55;display:flex;align-items:center;gap:8px;
+  background:var(--black);color:#fff;border-radius:22px;padding:8px 16px 8px 8px;font-size:14px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.ai-pill i{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7a5cff,#00a046);display:grid;place-items:center;font-style:normal;font-size:13px}
+.to-top{position:fixed;right:26px;bottom:24px;z-index:55;width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;
+  display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.to-top.is-on{opacity:1;pointer-events:auto}
+.to-top:hover{background:var(--green-hover);transform:translateY(-2px)}
+
+/* ---------- 9. Шари ---------- */
+.overlay{position:fixed;inset:0;background:rgba(34,31,31,.5);opacity:0;pointer-events:none;transition:opacity .22s;z-index:80}
+.overlay.is-on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;background:#fff;z-index:90;
+  transform:translateX(102%);transition:transform .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.drawer.is-on{transform:none}
+.drawer--left{right:auto;left:0;width:340px;transform:translateX(-102%)}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--black-10)}
+.drawer__head h3{font-size:18px;font-weight:700}
+.drawer__close{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:var(--black-60)}
+.drawer__close:hover{background:var(--black-5)}
+.drawer__body{flex:1;overflow:auto;padding:14px 16px}
+.drawer__foot{border-top:1px solid var(--black-10);padding:14px 16px}
+.cart-line{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--black-10)}
+.cart-line img{width:60px;height:60px;border-radius:var(--radius-sm);object-fit:contain;background:var(--black-5)}
+.cart-line b{font-weight:400;font-size:13px;display:block;margin-bottom:4px}
+.cart-line .price{font-size:16px}
+.qty{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--black-10);border-radius:var(--radius-sm);margin-top:6px}
+.qty button{width:26px;height:26px;display:grid;place-items:center;color:var(--black-80)}
+.qty button:hover{color:var(--green)}
+.qty span{min-width:26px;text-align:center;font-weight:600;font-size:13px}
+.cart-line .rm{margin-left:auto;color:var(--black-40);align-self:flex-start}
+.cart-line .rm:hover{color:var(--red)}
+.cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.cart-total .price{font-size:22px}
+.btn{height:48px;border-radius:var(--radius-sm);display:grid;place-items:center;font-weight:600;transition:.15s}
+.btn--green{background:var(--green);color:#fff}
+.btn--green:hover{background:var(--green-hover)}
+.btn--ghost{border:1px solid var(--black-10)}
+.btn--ghost:hover{border-color:var(--green);color:var(--green)}
+.empty{text-align:center;color:var(--black-60);padding:44px 16px}
+.empty .i{width:52px;height:52px;margin:0 auto 12px;color:var(--black-20)}
+.mega-title{padding:14px 12px 6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--black-60);display:flex;align-items:center;gap:8px}
+.mega-item{padding:9px 12px;border-radius:var(--radius-sm);display:flex;align-items:center;gap:10px;font-size:14px;color:var(--black)}
+.mega-item:hover{background:var(--green-10);color:var(--green)}
+.toasts{position:fixed;right:20px;bottom:150px;z-index:120;display:flex;flex-direction:column;gap:10px}
+.toast{display:flex;align-items:center;gap:10px;background:#fff;border-left:4px solid var(--green);border-radius:var(--radius-sm);
+  box-shadow:0 12px 40px rgba(0,0,0,.2);padding:12px 16px;font-size:13px;font-weight:500;animation:tin .25s ease}
+@keyframes tin{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+
+/* ---------- 10. Адаптив (брейкпоінти оригіналу: 640/768/1024/1280/1440) ---------- */
+@media(max-width:1439px){
+  :root{--pad:24px;--side:280px}
+  .shelf{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .hero h2{font-size:28px}
+}
+@media(max-width:1279px){
+  :root{--side:250px}
+  .shelf{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .f-top{grid-template-columns:1.1fr repeat(2,.9fr)}
+}
+@media(max-width:1023px){
+  :root{--pad:16px}
+  .layout{grid-template-columns:1fr}
+  .side{position:static}
+  .side-nav{display:none}
+  .side__promos{grid-template-columns:1fr 1fr}
+  .shelf{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .card{border-right:1px solid var(--black-10)}
+  .hero h2{font-size:24px}
+  .catalog-btn span{display:none}
+}
+@media(max-width:767px){
+  .shelf{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero{aspect-ratio:16/9;min-height:0}
+  .hero__slide{padding:0 20px}
+  .hero h2{font-size:20px}
+  .hero__lead{display:none}
+  .hero__art{display:none}
+  .logo__text{display:none}
+  .search__mic{display:none}
+  .f-top{grid-template-columns:1fr 1fr}
+  .hicon{width:40px}
+}
+@media(max-width:639px){
+  .side__promos{grid-template-columns:1fr}
+  .card__media{height:130px}
+  .price{font-size:20px}
+  .search__btn{padding:0 16px}
+  .f-top{grid-template-columns:1fr}
+  .strip{font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Перейти до контенту</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-smile" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#00a046"/><ellipse cx="10.6" cy="12.6" rx="2.5" ry="3.3" fill="#221f1f"/><path d="M17.6 12.4c1.7-2.2 3.9-2.7 6.1-1.5" fill="none" stroke="#221f1f" stroke-width="2.3" stroke-linecap="round"/><path d="M7.4 17.2h17.2a8.6 8.6 0 01-17.2 0z" fill="#221f1f"/><circle cx="12.4" cy="21.8" r="3" fill="#00a046"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16.6 16.6"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0013 0M12 18v3"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M2.6 3.6h2.6l2.3 11.1h10.2l2.4-8.1H6.3"/><rect x="7.5" y="17.4" width="2" height="2" rx="0.5" fill="currentColor" stroke="none"/><rect x="15.6" y="17.4" width="2" height="2" rx="0.5" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.3S4 15.4 4 10.2A4.2 4.2 0 0112 7.4a4.2 4.2 0 018 2.8c0 5.2-8 10.1-8 10.1z"/></symbol>
+  <symbol id="i-compare" viewBox="0 0 24 24"><path d="M12 6.2V20.6M7.4 20.6h9.2"/><path d="M4.4 8.6h15.2"/><circle cx="12" cy="6.4" r="1.7"/><path d="M6.6 9.6l-2.4 4.6h4.8zM17.4 9.6L15 14.2h4.8z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.4 20.6a7.6 7.6 0 0115.2 0"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 14.5l6-6 6 6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 4.5L7.5 12l7.5 7.5"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 4.5L16.5 12 9 19.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 6.5h15M9.5 6.5V4h5v2.5M7 6.5L8 21h8l1-14.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.5s7-6.6 7-11.3A7 7 0 105 10.2c0 4.7 7 11.3 7 11.3z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.5 2.5L4.5 13.5h6L10 21.5l9-11h-6z"/></symbol>
+  <symbol id="i-percent" viewBox="0 0 24 24"><path d="M6 18L18 6"/><circle cx="7.5" cy="7.5" r="2.6"/><circle cx="16.5" cy="16.5" r="2.6"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="12" rx="2"/><path d="M3.5 13.5h17M12 9v12"/><path d="M12 9S9.5 3.5 7.2 5 9 9 12 9s4.8-2.5 2.4-4S12 9 12 9z"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M2.5 10h19M6 15h3"/></symbol>
+  <!-- Іконки категорій: суцільні піктограми з білими вирізами (як в оригіналі) -->
+  <symbol id="c-battery" viewBox="0 0 24 24"><rect x="2.6" y="7" width="15.6" height="10" rx="2.6"/><rect x="19.6" y="9.8" width="2.4" height="4.4" rx="1.2"/><path d="M12.7 8.2l-3.6 5.1h2.5l-1 2.7 3.7-5.1h-2.5z" fill="#fff"/></symbol>
+  <symbol id="c-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.8"/><rect x="6.2" y="7.2" width="11.6" height="6.6" rx="0.8" fill="#fff"/><path d="M2.2 17.4h19.6a1 1 0 011 1v.4a1.2 1.2 0 01-1.2 1.2H2.4A1.2 1.2 0 011.2 18.8v-.4a1 1 0 011-1z"/></symbol>
+  <symbol id="c-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><rect x="9" y="5" width="6" height="12.4" rx="0.9" fill="#fff"/><circle cx="12" cy="19.4" r="0.9" fill="#fff"/></symbol>
+  <symbol id="c-gamepad" viewBox="0 0 24 24"><path d="M8.2 6h7.6a6 6 0 016 6v2.6a3.6 3.6 0 01-6.5 2.1l-.8-1h-5l-.8 1A3.6 3.6 0 012.2 14.6V12a6 6 0 016-6z"/><path d="M6.4 9.6H8.1v1.7h1.7v1.7H8.1v1.7H6.4v-1.7H4.7v-1.7h1.7z" fill="#fff"/><circle cx="15.9" cy="10.9" r="1.25" fill="#fff"/><circle cx="18.5" cy="13.5" r="1.25" fill="#fff"/></symbol>
+  <symbol id="c-washer" viewBox="0 0 24 24"><rect x="4" y="2.5" width="16" height="19" rx="2.6"/><rect x="6.4" y="5" width="6" height="2.6" rx="1.3" fill="#fff"/><circle cx="12" cy="14.6" r="4.6" fill="#fff"/><circle cx="12" cy="14.6" r="2.7"/></symbol>
+  <symbol id="c-armchair" viewBox="0 0 24 24"><path d="M6.2 11.4V8.2A2.7 2.7 0 018.9 5.5h6.2a2.7 2.7 0 012.7 2.7v3.2a2.6 2.6 0 012.2 2.6v4a1.8 1.8 0 01-1.8 1.8H4.8A1.8 1.8 0 013 18v-4a2.6 2.6 0 013.2-2.6z"/><path d="M6.6 12.6h1.9v4.2H6.6zM15.5 12.6h1.9v4.2h-1.9z" fill="#fff"/></symbol>
+  <symbol id="c-car" viewBox="0 0 24 24"><path d="M4.7 10.4l1.5-4A2.6 2.6 0 018.6 4.8h6.8a2.6 2.6 0 012.4 1.6l1.5 4A3 3 0 0122 13.2v3.4a1.3 1.3 0 01-1.3 1.3h-1.1a1.3 1.3 0 01-1.3-1.3v-.7H5.7v.7A1.3 1.3 0 014.4 18H3.3A1.3 1.3 0 012 16.6v-3.4a3 3 0 012.7-2.8z"/><circle cx="7.6" cy="13.4" r="1.35" fill="#fff"/><circle cx="16.4" cy="13.4" r="1.35" fill="#fff"/></symbol>
+  <symbol id="c-drill" viewBox="0 0 24 24"><rect x="2.4" y="6.2" width="10.6" height="6.2" rx="1.7"/><path d="M13 8.4h2.5l1.7 1.1v1.4l-1.7 1.1H13z"/><rect x="17.6" y="8.9" width="4" height="2.6" rx="0.7"/><path d="M5.2 12.4h4.6l-1 4.7a1.7 1.7 0 01-1.7 1.4H5.9a1.7 1.7 0 01-1.6-2z"/></symbol>
+  <symbol id="c-faucet" viewBox="0 0 24 24"><rect x="7.2" y="2.6" width="3" height="5" rx="1.2"/><path d="M3.4 6.6h10.4a2.4 2.4 0 012.4 2.4v2h-2.6V9.6a.5.5 0 00-.5-.5H3.4z"/><path d="M13.4 10.4h5.2v2.4h-5.2z"/><circle cx="16" cy="16.2" r="1.35"/><circle cx="16" cy="20.2" r="1.05"/></symbol>
+  <symbol id="c-can" viewBox="0 0 24 24"><path d="M7.4 8.4h7.2a3.2 3.2 0 013.2 3.2v8.4H4.2v-8.4a3.2 3.2 0 013.2-3.2z"/><path d="M9.4 8.4V6.6A1.6 1.6 0 0111 5h1a1.6 1.6 0 011.6 1.6v1.8z"/><path d="M17.6 11.2l3.6-2.6v2.9l-3.6 1.9z"/></symbol>
+  <symbol id="c-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M12 2.8c3.4 3.6 3.4 14.8 0 18.4M3.4 8.6c5.2 1.9 12 1.9 17.2 0M4.4 16.4c4.3-2.9 11-2.9 15.2 0" fill="none" stroke="#fff" stroke-width="1.5"/></symbol>
+  <symbol id="c-tshirt" viewBox="0 0 24 24"><path d="M9.1 3.4l2.9 1.9 2.9-1.9 4.9 3.4-2.5 3.5v9.9H6.7V10.3L4.2 6.8z"/></symbol>
+  <symbol id="c-perfume" viewBox="0 0 24 24"><rect x="7.8" y="9.4" width="8.4" height="11.2" rx="2.2"/><path d="M10.4 9.4V6.8h3.2v2.6z"/><rect x="9.4" y="3.4" width="5.2" height="2.4" rx="0.9"/><rect x="16.4" y="10.6" width="3.4" height="4.4" rx="1.2"/></symbol>
+  <symbol id="c-toy" viewBox="0 0 24 24"><circle cx="7.4" cy="7" r="3.2"/><circle cx="16.6" cy="7" r="3.2"/><circle cx="12" cy="14.4" r="6.6"/><circle cx="9.4" cy="13" r="1.05" fill="#fff"/><circle cx="14.6" cy="13" r="1.05" fill="#fff"/><ellipse cx="12" cy="16.8" rx="2.5" ry="1.9" fill="#fff"/></symbol>
+  <symbol id="c-paw" viewBox="0 0 24 24"><circle cx="5.9" cy="9.6" r="2.5"/><circle cx="10.6" cy="6.4" r="2.5"/><circle cx="16.9" cy="8" r="2.5"/><circle cx="20" cy="12" r="2.1"/><path d="M11.4 11.6c3.5 0 6.3 2.7 6.3 5.3S15 21 11.4 21s-6.3-1.5-6.3-4.1 2.8-5.3 6.3-5.3z"/></symbol>
+  <symbol id="c-clip" viewBox="0 0 24 24"><path d="M16.6 7.6v7.9a4.6 4.6 0 01-9.2 0V7.2a2.9 2.9 0 015.8 0v8.1a1.6 1.6 0 01-3.2 0V8.2" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="c-cocktail" viewBox="0 0 24 24"><path d="M3.2 4.2h17.6l-7.6 8.6v6.1h3.6v2.3H7.2v-2.3h3.6v-6.1z"/><path d="M13.4 2.2l4.4 6.4-1.9 1.3-4.4-6.4z"/><circle cx="11.6" cy="6" r="1.7" fill="#fff"/></symbol>
+  <symbol id="c-spray" viewBox="0 0 24 24"><rect x="8.4" y="9.4" width="7.2" height="11.2" rx="2.2"/><rect x="10.4" y="6.2" width="3.2" height="3.2"/><path d="M13.6 6.2h3.8v2.2h-3.8z"/><circle cx="19.4" cy="4.2" r="1"/><circle cx="21.4" cy="6.6" r="1"/><circle cx="18.8" cy="8.4" r="1"/></symbol>
+  <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M14 3v11.2a3.6 3.6 0 11-3.6-3.6M14 5.4c.6 2 2 3.2 4.2 3.4"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.9" cy="7.1" r="1.1"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5z"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21 4.5L2.8 11.3l5.4 1.9 1.8 5.6 2.9-3.7 5 3.6z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.7c0-.9.3-1.5 1.6-1.5h1.6V4.5c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2H7.5v3h2.3V21z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></symbol>
+  <symbol id="i-viber" viewBox="0 0 24 24"><path d="M12 2.5c5 0 9 3.4 9 7.6 0 4.2-4 7.6-9 7.6-.9 0-1.8-.1-2.6-.3L5 20l1-3.4c-1.8-1.4-3-3.4-3-6.1C3 5.9 7 2.5 12 2.5z"/><path d="M9 8.5c0 3 2.5 5.5 5.5 5.5"/></symbol>
+  <symbol id="i-apple" viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.2 1.2-2.4 1.3-2.5-.1 0-2.5-1-2.5-3.7zM14.3 5.6c.6-.8 1.1-1.9 1-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1 .1 2-.5 2.7-1.3z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M3.5 3.5v17l9.5-8.5zM14 10.5l3.8-3.4L6.3 2.9zM17.8 13.4L14 13.5l3.8 3.4 3-3.4zM6.3 21.1l11.5-4.2L14 13.5z"/></symbol>
+</defs></svg>
+
+<!-- 1. Промо-стрічка: у оригіналі це <rz-top-page-banner> з фоном #FFFAC6 -->
+<div class="strip">
+  <a class="strip__link" href="https://rozetka.com.ua/ua/smart/">
+    <picture>
+      <source media="(max-width:1023px)" srcset="https://content.rozetka.com.ua/banner_header/images_mobile_ua/big/657283745.jpg">
+      <img src="source/banner_header.webp" alt="Безкоштовна доставка та 0 ₴ комісій зі SMART" width="736" height="32"
+           onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+    </picture>
+    <span class="strip__text" hidden>Безкоштовна доставка та 0 ₴ комісій зі <span class="strip__mark"><i>SMART</i></span></span>
+  </a>
+</div>
+
+<!-- 2. Шапка -->
+<header class="hdr" id="hdr">
+  <div class="container hdr__in">
+    <button class="burger" data-open-catalog aria-label="Каталог товарів"><svg class="i"><use href="#i-menu"></use></svg></button>
+    <a class="logo" href="https://rozetka.com.ua/ua/" aria-label="ROZETKA">
+      <span class="logo__mark"><img src="source/logo.svg" alt="Rozetka" width="36" height="36" onerror="this.onerror=function(){this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%2716%27 fill=%27%2300a046%27/%3E%3Cellipse cx=%2710.6%27 cy=%2712.6%27 rx=%272.5%27 ry=%273.3%27 fill=%27%23221f1f%27/%3E%3Cpath d=%27M17.6 12.4c1.7-2.2 3.9-2.7 6.1-1.5%27 fill=%27none%27 stroke=%27%23221f1f%27 stroke-width=%272.3%27 stroke-linecap=%27round%27/%3E%3Cpath d=%27M7.4 17.2h17.2a8.6 8.6 0 01-17.2 0z%27 fill=%27%23221f1f%27/%3E%3Ccircle cx=%2712.4%27 cy=%2721.8%27 r=%273%27 fill=%27%2300a046%27/%3E%3C/svg%3E'};this.src='https://content1.rozetka.com.ua/logo/site_mini_logo/original/559597093.svg'"></span>
+      <span class="logo__text">Rozetka</span>
+    </a>
+    <button class="catalog-btn" data-open-catalog>
+      <svg class="i i--20"><use href="#i-grid"></use></svg><span>Каталог</span>
+    </button>
+    <form class="search" id="searchForm" role="search" autocomplete="off">
+      <svg class="i i--20 search__ico"><use href="#i-search"></use></svg>
+      <input id="searchInput" type="search" placeholder="Я шукаю..." aria-label="Пошук товарів">
+      <button type="button" class="search__mic" aria-label="Голосовий пошук"><svg class="i i--20"><use href="#i-mic"></use></svg></button>
+      <button class="search__btn" type="submit">Знайти</button>
+      <div class="search__suggest" id="suggest" hidden></div>
+    </form>
+    <div class="hdr__actions">
+      <a class="hicon" href="https://rozetka.com.ua/ua/profile/" aria-label="Особистий кабінет"><svg class="i"><use href="#i-user"></use></svg></a>
+      <a class="hicon" href="https://rozetka.com.ua/ua/comparison/" aria-label="Списки порівнянь"><svg class="i"><use href="#i-compare"></use></svg><span class="hicon__badge hicon__badge--empty" data-compare-count></span></a>
+      <button class="hicon" data-open-cart aria-label="Кошик"><svg class="i"><use href="#i-cart"></use></svg><span class="hicon__badge hicon__badge--empty" data-cart-count></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="container layout">
+  <!-- 3. Сайдбар -->
+  <aside class="side">
+        <div class="side__promos">
+      <a class="side-promo side-promo--green" href="https://rozetka.com.ua/ua/rozetka-card/">
+        <span class="side-promo__mark side-promo__mark--card"><img src="source/%D0%BA%D0%B0%D1%80%D1%82%D0%B0%20%D1%80%D0%BE%D0%B7%D0%B5%D1%82%D0%BA%D0%B8%20%D0%B8%D0%BA%D0%BE%D0%BD%D0%BA%D0%B0.svg" alt="" width="32" height="22" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2022%22%3E%3Crect%20width%3D%2232%22%20height%3D%2221.3%22%20rx%3D%223.2%22%20fill%3D%22%23c2f4d8%22%2F%3E%3Crect%20x%3D%223.2%22%20y%3D%225.8%22%20width%3D%2225.6%22%20height%3D%223%22%20rx%3D%221.5%22%20fill%3D%22%2305bc52%22%2F%3E%3Crect%20x%3D%224.6%22%20y%3D%2212%22%20width%3D%226.4%22%20height%3D%224.6%22%20rx%3D%221.2%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%2214.6%22%20width%3D%2213.4%22%20height%3D%222.2%22%20rx%3D%221.1%22%20fill%3D%22%23ffffff%22%2F%3E%3C%2Fsvg%3E'"></span>
+        <span><b>Картка Rozetka</b><span>Персональні знижки та бонуси</span></span>
+      </a>
+      <a class="side-promo side-promo--yellow" href="https://rozetka.com.ua/ua/smart/">
+        <span class="side-promo__mark side-promo__mark--smart"><img src="source/%D0%A1%D0%BC%D0%B0%D1%80%D1%82%20%D0%BF%D1%8B%D0%B4%D0%BF%D0%B8%D1%81%D0%BA%D0%B0%20%D0%B8%D0%BA%D0%BE%D0%BD%D0%BA%D0%B0.svg" alt="" width="32" height="32" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%2216%22%20fill%3D%22%23f2e312%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2222.5%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2215%22%20font-weight%3D%22bold%22%20fill%3D%22%23221f1f%22%20text-anchor%3D%22middle%22%3ES!%3C%2Ftext%3E%3C%2Fsvg%3E'"></span>
+        <span><b>Smart підписка</b><span>Безкоштовна доставка лише 50 ₴/міс.</span></span>
+      </a>
+    </div>
+    <nav class="side-nav" id="sideNav" aria-label="Категорії"></nav>
+    <div class="side-block">
+      <h4>Встановіть наші застосунки</h4>
+      <div class="badges">
+        <a class="badge-app" href="https://rozetka.com.ua/ua/apps/"><svg class="i"><use href="#i-apple"></use></svg><span>App Store<em>Завантажити в</em></span></a>
+        <a class="badge-app" href="https://rozetka.com.ua/ua/apps/"><svg class="i"><use href="#i-play"></use></svg><span>Google Play<em>Завантажити в</em></span></a>
+      </div>
+    </div>
+    <div class="side-block">
+      <h4>Ми в соціальних мережах</h4>
+      <div class="socials" id="sideSocials"></div>
+    </div>
+  </aside>
+
+  <!-- 4. Контент -->
+  <main id="main">
+    <section class="hero" id="hero" aria-label="Акційні пропозиції"></section>
+    <div class="hero__foot">
+      <a href="https://rozetka.com.ua/ua/news-articles-promotions/promotions/">Всі акції <svg class="i i--16"><use href="#i-right"></use></svg></a>
+    </div>
+
+    <section class="block">
+      <h2 class="block__title">Рекомендації на основі ваших переглядів</h2>
+      <div class="shelf" id="shelf1"></div>
+    </section>
+
+    <section class="block">
+      <h2 class="block__title">Найкращі пропозиції для вас</h2>
+      <div class="shelf" id="shelf2"></div>
+      <div class="more"><button type="button" id="loadMore">Показати ще <svg class="i i--18"><use href="#i-down"></use></svg></button></div>
+    </section>
+
+    <section class="seo">
+      <h2>Інтернет-магазин техніки та товарів для дому</h2>
+      <p>Це демонстраційна копія головної сторінки онлайн-гіпермаркету: відтворено структуру, дизайн-систему та основні сценарії — каталог, пошук із підказками, банер із акціями, полиці товарів, кошик і список обраного.</p>
+      <h3>Наше бачення</h3>
+      <p>Ми віримо, що речі існують для того, щоб робити життя простішим, приємнішим і добрішим. Тому пошук потрібної речі має бути швидким, зручним і зрозумілим — без зайвих кроків і зайвих хвилювань.</p>
+      <a class="seo__more" href="https://rozetka.com.ua/ua/about-us/">Читати повністю <svg class="i i--16"><use href="#i-down"></use></svg></a>
+    </section>
+  </main>
+</div>
+
+<!-- 7. Футер -->
+<footer>
+  <div class="container">
+    <div class="f-top" id="footCols"></div>
+    <div class="f-mid">
+      <div class="f-pay"><span>VISA</span><span>Mastercard</span><span>RozetkaPay</span><span>Готівка</span><span>Оплата частинами</span></div>
+    </div>
+    <div class="f-bot">
+      <span>© 2005–2025 Rozetka. Права на бренд належать правовласникам.</span>
+      <span>Демонстраційна (навчальна) копія головної сторінки. Не є офіційним сайтом.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="ai-pill" type="button" data-ai><i>✦</i> Rozetka AI</button>
+<button class="to-top" id="toTop" aria-label="Догори"><svg class="i"><use href="#i-up"></use></svg></button>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="drawer" id="cartDrawer" aria-label="Кошик" aria-hidden="true">
+  <div class="drawer__head"><h3>Кошик</h3>
+    <button class="drawer__close" data-close-drawers aria-label="Закрити"><svg class="i"><use href="#i-close"></use></svg></button></div>
+  <div class="drawer__body" id="cartBody"></div>
+  <div class="drawer__foot" id="cartFoot"></div>
+</aside>
+
+<aside class="drawer drawer--left" id="catalogDrawer" aria-label="Каталог" aria-hidden="true">
+  <div class="drawer__head"><h3>Каталог</h3>
+    <button class="drawer__close" data-close-drawers aria-label="Закрити"><svg class="i"><use href="#i-close"></use></svg></button></div>
+  <div class="drawer__body" id="catalogBody"></div>
+</aside>
+
+<aside class="drawer drawer--left" id="cityDrawer" aria-label="Вибір міста" aria-hidden="true">
+  <div class="drawer__head"><h3>Ваше місто</h3>
+    <button class="drawer__close" data-close-drawers aria-label="Закрити"><svg class="i"><use href="#i-close"></use></svg></button></div>
+  <div class="drawer__body" id="cityBody"></div>
+</aside>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script>
+/* =========================================================================
+   Демо-репліка головної сторінки rozetka.com.ua — один файл, без збірки.
+   Дизайн-токени, структура та поведінка зняті з реальної сторінки.
+   Усі зовнішні посилання ведуть на справжній сайт у новій вкладці.
+   ========================================================================= */
+(function () {
+'use strict';
+
+/* ---------------------------------------------------------------- 1. CONFIG */
+var CONFIG = {
+  site: 'https://rozetka.com.ua',
+  lang: 'ua',
+  /* Публічного API без ключа немає, прямий fetch ріже CORS.
+     Підставте свій проксі — підказки пошуку почнуть брати живі дані. */
+  api: { enabled: false, endpoint: '', key: '' }
+};
+function siteUrl(path) {
+  if (/^https?:/i.test(path || '')) return path;
+  return CONFIG.site + '/' + CONFIG.lang + '/' + (path || '');
+}
+function searchUrl(q) { return siteUrl('search/?text=' + encodeURIComponent(q)); }
+function fetchRemoteProducts(query) {
+  if (!CONFIG.api.enabled || !CONFIG.api.endpoint) return Promise.resolve(null);
+  var headers = {};
+  if (CONFIG.api.key) headers.Authorization = 'Bearer ' + CONFIG.api.key;
+  return fetch(CONFIG.api.endpoint + '/search?q=' + encodeURIComponent(query), { headers: headers })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .catch(function (e) { console.warn('[RozetkaAPI]', e); return null; });
+}
+
+/* ------------------------------------------------------------------ 2. DATA */
+var PROMO_URL = 'https://rozetka.com.ua/ua/news-articles-promotions/promotions/';
+
+/* Ліве меню категорій — як на реальній сторінці. u: справжні адреси,
+   для решти розділів посилання веде на пошук за назвою (без 404). */
+var CATS = [
+  { t: 'Енергонезалежність', icon: 'c-battery', active: true, u: searchUrl('енергонезалежність') },
+  { t: 'Ноутбуки та комп\u2019ютери', icon: 'c-laptop', u: 'https://rozetka.com.ua/ua/computers-notebooks/c80253/' },
+  { t: 'Смартфони, ТВ і електроніка', icon: 'c-phone', u: 'https://rozetka.com.ua/ua/telefony-tv-i-ehlektronika/c4627949/' },
+  { t: 'Товари для геймерів', icon: 'c-gamepad', u: 'https://rozetka.com.ua/ua/game-zone/c80261/' },
+  { t: 'Побутова техніка', icon: 'c-washer', u: 'https://bt.rozetka.com.ua/ua/' },
+  { t: 'Товари для дому', icon: 'c-armchair', u: 'https://rozetka.com.ua/ua/tovary-dlya-doma/c2394287/' },
+  { t: 'Авто і мото', icon: 'c-car' },
+  { t: 'Інструменти та обладнання', icon: 'c-drill' },
+  { t: 'Сантехніка та ремонт', icon: 'c-faucet' },
+  { t: 'Дача, сад і город', icon: 'c-can' },
+  { t: 'Спорт і захоплення', icon: 'c-ball' },
+  { t: 'Одяг, взуття та аксесуари', icon: 'c-tshirt' },
+  { t: 'Краса та здоров\u2019я', icon: 'c-perfume' },
+  { t: 'Дитячі товари', icon: 'c-toy' },
+  { t: 'Зоотовари', icon: 'c-paw' },
+  { t: 'Офіс, школа, книги', icon: 'c-clip' },
+  { t: 'Алкогольні напої та продукти', icon: 'c-cocktail' },
+  { t: 'Побутова хімія', icon: 'c-spray' }
+];
+function catLink(c) { return c.u || searchUrl(c.t); }
+
+var CATALOG = [
+  { title: 'Ноутбуки та комп\u2019ютери', icon: 'c-laptop', items: ['Ноутбуки', 'Ультрабуки', 'Планшети', 'Монітори', 'Комплектуючі', 'Периферія', 'Ігрові ПК'] },
+  { title: 'Смартфони, ТВ і електроніка', icon: 'c-phone', items: ['Смартфони', 'Телевізори', 'Навушники', 'Аудіотехніка', 'Фото і відео', 'Ігрові консолі', 'Гаджети'] },
+  { title: 'Побутова техніка', icon: 'c-washer', items: ['Пральні машини', 'Холодильники', 'Пилососи', 'Мікрохвильові печі', 'Плити та духовки', 'Кліматична техніка'] },
+  { title: 'Товари для дому', icon: 'c-armchair', items: ['Посуд', 'Меблі', 'Текстиль', 'Освітлення', 'Декор', 'Сад і город'] },
+  { title: 'Авто і мото', icon: 'c-car', items: ['Автотовари', 'Шини та диски', 'Автоелектроніка', 'Мототехніка', 'Аксесуари'] },
+  { title: 'Інструменти та обладнання', icon: 'c-drill', items: ['Шурупокрути', 'Перфоратори', 'Ручний інструмент', 'Зварювання', 'Компресори'] },
+  { title: 'Спорт і захоплення', icon: 'c-ball', items: ['Велосипеди', 'Тренажери', 'Туризм', 'Риболовля', 'Музичні інструменти'] },
+  { title: 'Краса та здоров\u2019я', icon: 'c-perfume', items: ['Догляд за обличчям', 'Догляд за волоссям', 'Парфуми', 'Макіяж', 'Вітаміни'] },
+  { title: 'Дитячі товари', icon: 'c-toy', items: ['Візочки', 'Автокрісла', 'Іграшки', 'Дитячий одяг', 'Годування'] },
+  { title: 'Офіс, школа, книги', icon: 'c-clip', items: ['Книги', 'Канцелярія', 'Зошити', 'Рюкзаки', 'Творчість'] }
+];
+
+var SLIDES = [
+  { eyebrow: 'Тиждень техніки', title: 'Знижки до 50% на смартфони та ноутбуки', lead: 'Понад 10 000 товарів за акційними цінами та доставка по всій Україні', cta: 'Дивитись акції', href: PROMO_URL, bg: 'linear-gradient(115deg,#00893c 0%,#00a046 55%,#2ecc71 130%)' },
+  { eyebrow: 'RozetkaPay', title: 'Оплата частинами 0% на 8 платежів', lead: 'Оформлення онлайн за 2 хвилини, без довідок і прихованих комісій', cta: 'Оформити частинами', href: siteUrl('credit/'), bg: 'linear-gradient(115deg,#12233f 0%,#1f4f8f 55%,#2f9be0 130%)' },
+  { eyebrow: 'Все для дому', title: 'Затишок зі знижками до 40%', lead: 'Посуд, текстиль та освітлення, які роблять дім теплішим', cta: 'Обрати товари', href: siteUrl('tovary-dlya-doma/c2394287/'), bg: 'linear-gradient(115deg,#4a1f5c 0%,#a02a86 55%,#ff8a5c 130%)' }
+];
+
+var PRODUCTS = [
+  { id: 383085021, t: "Гра Minecraft Java + Bedrock Edition для ПК (Ключ активації Microsoft)", p: 1299, o: 0, r: 4.9, rv: 1247, s: "GameXpress", g: "tools", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/383085021/p383085021/", img: "https://content.rozetka.com.ua/goods/images/original/470821774.jpg" },
+  { id: 557336142, t: "Креатин OstroVit Creatine Monohydrate пакет", p: 510, o: 0, r: 4.3, rv: 926, s: "Sportavia", g: "default", bonus: 1, deliv: true, href: "https://fit.rozetka.com.ua/ua/creatine-ostrovit-155208839/p557336142/", img: "https://content1.rozetka.com.ua/goods/images/original/612541207.png" },
+  { id: 419009118, t: "Туристичний газовий пальник плитка з п'єзопідпалом + кейс Happy Home", p: 568, o: 0, r: 4.4, rv: 882, s: "Східний Експрес", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/419009118/p419009118/", img: "https://content1.rozetka.com.ua/goods/images/original/419027888.jpg" },
+  { id: 397721109, t: "Ковдра Руно зимова полуторна 140x205 см антиалергенне волокно Grey Cat (Р321.52СЛУ_Grey Cat)", p: 669, o: 1019, r: 4.8, rv: 765, s: "Rozetka", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/runo-r32152slu-grey-cat/p397721109/", img: "https://content.rozetka.com.ua/goods/images/original/368457056.jpg" },
+  { id: 2231282, t: "Конвектор COOPER&HUNTER CH-1500 MC", p: 2199, o: 2999, r: 4.6, rv: 743, s: "Rozetka", g: "default", bonus: 1, deliv: true, href: "https://bt.rozetka.com.ua/ua/2231282/p2231282/", img: "https://content1.rozetka.com.ua/goods/images/original/10641190.jpg" },
+  { id: 567004069, t: "Mini Ups безперебійник для wi fi роутера 10400 mah юпс повербанк з автоперемиканням Model 103A міні упс джерел", p: 1299, o: 2495, r: 4.2, rv: 464, s: "KayDzen", g: "default", bonus: 29, deliv: true, href: "https://hard.rozetka.com.ua/ua/567004069/p567004069/", img: "https://content1.rozetka.com.ua/goods/images/original/688032600.png" },
+  { id: 351720123, t: "Armaf Club De Nuit Intense Man туалетна вода для чоловіків", p: 1300, o: 1700, r: 4.3, rv: 455, s: "RozetkaEU", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/armaf-club-de-nuit-intense-man/g53232159/", img: "https://content.rozetka.com.ua/goods/images/original/447616290.jpg" },
+  { id: 423732921, t: "Оливкова олія Borges Extra Virgin 1 л (8410179100012)", p: 489, o: 935, r: 4.7, rv: 403, s: "Rozetka", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/borges-8410179100012/p423732921/", img: "https://content2.rozetka.com.ua/goods/images/original/594292276.jpg" },
+  { id: 460219049, t: "Ігрова приставка Game Stick HDMI 20000 ігор. Ретро консоль. 2 геймпада як у PlayStation. Карта пам'яті 64 гб. ", p: 1075, o: 1437, r: 4.2, rv: 364, s: "Цирконій", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/460219049/p460219049/", img: "https://content2.rozetka.com.ua/goods/images/original/563714588.jpg" },
+  { id: 543553270, t: "Мобільний телефон Apple iPhone 17 Pro Max 256GB Deep Blue (MFYP4AF/A)", p: 65999, o: 72999, r: 4.8, rv: 328, s: "Rozetka", g: "phone", bonus: 659, deliv: true, href: "https://rozetka.com.ua/ua/apple-iphone-17-pro-max-256gb-deep-blue-mfyp4af-a/p543553270/", img: "https://content2.rozetka.com.ua/goods/images/original/594372256.jpg" },
+  { id: 363043857, t: "Протеїн Scitec Nutrition 100% Whey Protein Prof", p: 1754, o: 0, r: 4.5, rv: 324, s: "Rozetka", g: "default", bonus: 1, deliv: true, href: "https://fit.rozetka.com.ua/ua/scitec-nutrition-5999100029378/p363043857/", img: "https://content1.rozetka.com.ua/goods/images/original/558949007.jpg" },
+  { id: 553618662, t: "Повербанк 50000 mah 22.5W Qinetiq RQ-50 з LED дисплеєм і швидкою зарядкою PD/QC 3 порта кабель Type-C в компле", p: 2499, o: 2999, r: 4.6, rv: 316, s: "AMPERE", g: "phone", bonus: 26, deliv: true, href: "https://rozetka.com.ua/ua/universalnye-mobilnye-batarei-qinetiq-153743179/p553618662/", img: "https://content.rozetka.com.ua/goods/images/original/669266158.jpg" },
+  { id: 468811534, t: "Крісло ігрове з підніжкою RZTK Viper Grey", p: 3699, o: 4499, r: 4.5, rv: 313, s: "Rozetka", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/rztk-vc1/p468811534/", img: "https://content2.rozetka.com.ua/goods/images/original/551342120.jpg" },
+  { id: 71680293, t: "Сухий корм для дорослих собак Клуб 4 лапи Преміум для середніх порід", p: 1576, o: 2011, r: 4.8, rv: 308, s: "Rozetka", g: "paw", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/club_4_paws_4820083909719/p71680293/", img: "https://content1.rozetka.com.ua/goods/images/original/583535924.jpg" },
+  { id: 355737885, t: "Набір сковорідок зі знімною ручкою Tefal Ingenio Emotion (24 см, 28 см) (L897S374)", p: 2399, o: 5999, r: 4.8, rv: 306, s: "Rozetka", g: "book", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/tefal_l897s374/p355737885/", img: "https://content2.rozetka.com.ua/goods/images/original/290011557.jpg" },
+  { id: 395631402, t: "Мікрохвильова піч Grunhelm 20MX711-B", p: 2299, o: 2979, r: 4.7, rv: 294, s: "Rozetka", g: "house", bonus: 1, deliv: true, href: "https://bt.rozetka.com.ua/ua/grunhelm-bp127159/p395631402/", img: "https://content1.rozetka.com.ua/goods/images/original/503064301.jpg" },
+  { id: 50750646, t: "Подушка ортопедична MirSon Premium Eco Aloe Vera 147 Середня 50x70 см (2200000393029)", p: 529, o: 802, r: 4.4, rv: 291, s: "Rozetka", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/mirson_2200000393029/p50750646/", img: "https://content2.rozetka.com.ua/goods/images/original/667642785.jpg" },
+  { id: 626803535, t: "Сумка мішок для прання взуття, кросівок і делікатних тканин у пральній машині BauTech SN27 39х19 см Жовтий", p: 270, o: 300, r: 4.6, rv: 274, s: "Podao", g: "washer", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/626803535/p626803535/", img: "https://content1.rozetka.com.ua/goods/images/original/687677240.jpg" },
+  { id: 625025687, t: "УМБ Baseus Adaman Metal Digital Display 20000mAh 22.5W Black (P10021502112-01)", p: 1699, o: 1886, r: 4.3, rv: 254, s: "TutTehno", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/625025687/p625025687/", img: "https://content1.rozetka.com.ua/goods/images/original/686620027.jpg" },
+  { id: 402281856, t: "Бездротові блютуз навушники LEXEGO Air 3 (3 покоління) чип Jerry для телефона айфона андроїд безпровідна заряд", p: 849, o: 2100, r: 4.4, rv: 237, s: "SmartTrust", g: "headphones", bonus: 4, deliv: true, href: "https://rozetka.com.ua/ua/402281856/p402281856/", img: "https://content1.rozetka.com.ua/goods/images/original/532303671.jpg" },
+  { id: 339537973, t: "Налобний світлодіодний ліхтарик H025C VIDEX 310 лм 5000K", p: 740, o: 778, r: 4.6, rv: 236, s: "ELECTRICK", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/339537973/p339537973/", img: "https://content1.rozetka.com.ua/goods/images/original/347337687.jpg" },
+  { id: 391046550, t: "Електро-простирадло 120x160 см байка Простирадло з підігрівом Yasam Блакитний", p: 649, o: 941, r: 4.3, rv: 233, s: "kostor", g: "default", bonus: 1, deliv: true, href: "https://bt.rozetka.com.ua/ua/391046550/p391046550/", img: "https://content1.rozetka.com.ua/goods/images/original/639436662.jpg" },
+  { id: 1554772, t: "Моторна олива Mobil 1 Super 3000 x1 Formula FE", p: 456, o: 607, r: 4.5, rv: 231, s: "Rozetka", g: "default", bonus: 1, deliv: true, href: "https://auto.rozetka.com.ua/ua/mobil_super_3000_x1_formula_fe_5w_30_1l/p1554772/", img: "https://content.rozetka.com.ua/goods/images/original/685168532.jpg" },
+  { id: 565221197, t: "Килимок спортивний IVN 1800х600х5 мм Синій (SP-7223B)", p: 299, o: 0, r: 4.2, rv: 225, s: "triple store", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/565221197/p565221197/", img: "https://content2.rozetka.com.ua/goods/images/original/268114822.jpg" },
+  { id: 374984130, t: "Комплект швидкого заряджання для iPhone iPad, Блок 20W USB-C Power Adapter (Type-C) + Кабель заряджання USB-C ", p: 322, o: 570, r: 4.4, rv: 224, s: "kostor", g: "phone", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/374984130/p374984130/", img: "https://content2.rozetka.com.ua/goods/images/original/283339244.jpg" },
+  { id: 556829259, t: "Парфумований кондиціонер-ополіскувач для білизни Tesori d'Oriente AYURVEDA (58 прань), 1160 мл", p: 293, o: 0, r: 4.6, rv: 187, s: "PreChisto", g: "cosmetics", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/konditsioneri-opolaskivateli-smyagchiteli-vodi-tesori-doriente-155007556/p556829259/", img: "https://content2.rozetka.com.ua/goods/images/original/617387584.jpg" },
+  { id: 536375079, t: "Штора- жалюзі YouWe Пліссе Самоклеюча Без свердління", p: 345, o: 485, r: 4.9, rv: 186, s: "TOPLAK", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/zhalyuzi-rolety-i-rulonnye-shtory-148461735/p536375079/", img: "https://content1.rozetka.com.ua/goods/images/original/586469335.jpg" },
+  { id: 442350092, t: "Супутникова система старлінк, STARLINK Mini без облікового запису та без прив'язки до місця", p: 24699, o: 26990, r: 5, rv: 162, s: "Take-it", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/442350092/p442350092/", img: "https://content.rozetka.com.ua/goods/images/original/602414021.jpg" },
+  { id: 303656623, t: "Джин Thorn 0.7 л 40% (4770053240673)", p: 319, o: 427, r: 4.6, rv: 150, s: "Rozetka", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/thorn_4770053240673/p303656623/", img: "https://content1.rozetka.com.ua/goods/images/original/185641018.jpg" },
+  { id: 458203409, t: "Підгузки для дорослих STILL Adult Diaper L 30 шт памперси великих розмірів 110-150 см для людей похилого віку ", p: 625, o: 830, r: 4.2, rv: 150, s: "ЛаваТоварів", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/458203409/p458203409/", img: "https://content1.rozetka.com.ua/goods/images/original/497237508.jpg" },
+  { id: 427591274, t: "Бойлер Swan SSB-15w1 прямокутний 15л з сухим ТЕНом 2кВт", p: 3789, o: 5490, r: 4.9, rv: 145, s: "Syg.nus shop", g: "default", bonus: 39, deliv: true, href: "https://bt.rozetka.com.ua/ua/427591274/p427591274/", img: "https://content.rozetka.com.ua/goods/images/original/661628733.jpg" },
+  { id: 490629559, t: "Насадки для зубної щітки PHILIPS Sonicare HX9094/88 А3 All-in-One", p: 2699, o: 0, r: 4.7, rv: 135, s: "Rozetka", g: "default", bonus: 1, deliv: true, href: "https://bt.rozetka.com.ua/ua/philips-hx9094-88/p490629559/", img: "https://content2.rozetka.com.ua/goods/images/original/525689153.jpg" },
+  { id: 363850257, t: "ДБЖ Volt Polska SINUS PRO 1000 E 12/230V 700/1000W (3SP091012E)", p: 5999, o: 7699, r: 4.4, rv: 125, s: "RozetkaEU", g: "default", bonus: 1, deliv: true, href: "https://hard.rozetka.com.ua/ua/volt-polska-3sp091012e/p363850257/", img: "https://content2.rozetka.com.ua/goods/images/original/634008752.png" },
+  { id: 446963351, t: "УМБ XO PR240 30000mAh PD20W + QC22.5W Black (PR240_Black)", p: 999, o: 1699, r: 4.3, rv: 124, s: "Rozetka", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/xo-pr240-black/p446963351/", img: "https://content.rozetka.com.ua/goods/images/original/681270749.jpg" },
+  { id: 259318681, t: "Кігтеточка дряпка з гофрокартону лежанка для котів з картонним фасадом Cat Joy Modern Whitish 54x13x25 см", p: 450, o: 0, r: 4.9, rv: 120, s: "C&D Joy", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/259318681/p259318681/", img: "https://content1.rozetka.com.ua/goods/images/original/419314491.jpg" },
+  { id: 354192819, t: "Зовнішній інтернет кабель 25м патч корд кабель для інтернету CAT5e LAN UTP (Gigabit RJ45, до 1000Мбіт/с) (0458", p: 392, o: 447, r: 4.8, rv: 111, s: "Albelgo", g: "default", bonus: 1, deliv: true, href: "https://rozetka.com.ua/ua/354192819/p354192819/", img: "https://content.rozetka.com.ua/goods/images/original/542804120.jpg" }
+];
+
+var SOCIALS = [
+  ['i-tiktok', 'https://www.tiktok.com/@rozetka_ua'],
+  ['i-tg', 'https://t.me/rozetka_ua'],
+  ['i-fb', 'https://www.facebook.com/rozetka.ua'],
+  ['i-yt', 'https://www.youtube.com/user/rozetka'],
+  ['i-ig', 'https://www.instagram.com/rozetka_ua/'],
+  ['i-x', 'https://x.com/rozetka_ua'],
+  ['i-viber', 'https://rozetka.com.ua/ua/']
+];
+
+var FOOTER = [
+  { title: 'Інформація про компанію', links: [['Про нас', 'about-us/'], ['Умови використання сайту', 'terms/'], ['Вакансії', 'vacancies/'], ['Контакти', 'contacts/'], ['Всі категорії', '']] },
+  { title: 'Допомога', links: [['Доставка та оплата', 'payment-and-delivery/'], ['Кредит', 'credit/'], ['Гарантія', 'warranty/'], ['Повернення товару', 'return/']] },
+  { title: 'Сервіси', links: [['Бонусний рахунок', 'bonus/'], ['Картка Rozetka', 'rozetka-card/'], ['Подарункові сертифікати', 'gift-certificates/'], ['Rozetka Обмін', 'rozetka-exchange/'], ['Корпоративним клієнтам', 'corporate/']] },
+  { title: 'Партнерам', links: [['Продавати на Rozetka', 'sell/'], ['Реклама на Rozetka', 'advertising/'], ['Співпраця з нами', 'partners/'], ['Франчайзинг', 'franchise/'], ['Оренда приміщень', 'rent/']] }
+];
+
+var CITIES = ['Київ', 'Львів', 'Одеса', 'Харків', 'Дніпро', 'Запоріжжя', 'Вінниця', 'Івано-Франківськ', 'Тернопіль', 'Полтава', 'Черкаси', 'Житомир', 'Рівне', 'Луцьк', 'Ужгород', 'Чернівці', 'Миколаїв', 'Суми', 'Кропивницький', 'Хмельницький'];
+
+/* --------------------------------------------------------------- 3. HELPERS */
+function $(s, r) { return (r || document).querySelector(s); }
+function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+function esc(v) { return String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function money(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u2009') + '\u00A0₴'; }
+function ico(n, c) { return '<svg class="i ' + (c || '') + '"><use href="#' + n + '"></use></svg>'; }
+
+/* Заглушки фото: SVG просто в документі, тож сторінка працює офлайн.
+   Реальне фото підставляється полем img:'https://...' у PRODUCTS. */
+var PH = {
+  phone: '<rect x="76" y="46" width="48" height="108" rx="12"/><path d="M92 140h16"/>',
+  laptop: '<rect x="48" y="56" width="104" height="66" rx="8"/><path d="M36 140h128"/>',
+  tv: '<rect x="40" y="54" width="120" height="76" rx="8"/><path d="M78 156h44M100 130v26"/>',
+  washer: '<rect x="58" y="42" width="84" height="116" rx="10"/><path d="M58 74h84"/><circle cx="100" cy="118" r="22"/>',
+  fridge: '<rect x="66" y="40" width="68" height="120" rx="10"/><path d="M66 92h68M82 62v14M82 106v18"/>',
+  vacuum: '<path d="M52 156h40a22 22 0 0022-22V84"/><circle cx="118" cy="66" r="18"/><path d="M52 156v-20"/>',
+  headphones: '<path d="M58 116V100a42 42 0 0184 0v16"/><rect x="44" y="108" width="26" height="42" rx="10"/><rect x="130" y="108" width="26" height="42" rx="10"/>',
+  watch: '<rect x="76" y="70" width="48" height="60" rx="16"/><path d="M86 70V46h28v24M86 130v24h28v-24"/>',
+  tools: '<path d="M126 48a30 30 0 00-25 46l-45 45 14 14 45-45a30 30 0 0037-37l-20 20-16-16z"/>',
+  bike: '<circle cx="62" cy="130" r="22"/><circle cx="140" cy="130" r="22"/><path d="M62 130l26-52h26l26 52M88 78h26"/>',
+  dumbbell: '<path d="M44 86v28M62 70v60M138 70v60M156 86v28M62 100h76"/>',
+  cosmetics: '<rect x="76" y="86" width="48" height="66" rx="10"/><path d="M88 86V66h24v20M82 50h36"/>',
+  stroller: '<circle cx="66" cy="146" r="16"/><circle cx="140" cy="146" r="16"/><path d="M44 52h20l14 62h60l14-40H76"/>',
+  shirt: '<path d="M82 44l18 12 18-12 26 18-13 20v76H69V82L56 62z"/>',
+  paw: '<circle cx="66" cy="88" r="13"/><circle cx="100" cy="72" r="13"/><circle cx="134" cy="88" r="13"/><path d="M100 104c18 0 30 13 30 25s-13 19-30 19-30-7-30-19 12-25 30-25z"/>',
+  book: '<path d="M42 50h34a18 18 0 0118 18v82a16 16 0 00-16-16H42z"/><path d="M158 50h-34a18 18 0 00-18 18v82a16 16 0 0116-16h36z"/>',
+  house: '<path d="M40 100l60-52 60 52v76H40z"/><path d="M80 176v-46h40v46"/>',
+  default: '<rect x="44" y="56" width="112" height="88" rx="10"/><circle cx="76" cy="86" r="10"/><path d="M52 132l34-32 26 24 20-18 24 26"/>'
+};
+function photo(g, seed) {
+  var hue = (seed * 47) % 360;
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">' +
+    '<rect width="400" height="400" fill="hsl(' + hue + ',30%,98%)"/>' +
+    '<circle cx="330" cy="70" r="120" fill="hsl(' + hue + ',26%,93%)"/>' +
+    '<g transform="translate(100,100)" fill="none" stroke="hsl(' + hue + ',16%,64%)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">' +
+    (PH[g] || PH.default) + '</g></svg>';
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+function productImage(p) { return p.img || photo(p.g, p.id); }
+
+/* Фото товарів підключаються посиланням на CDN (права належать правовласникам).
+   Якщо зображення недоступне, автоматично підставляється локальна SVG-заглушка —
+   сторінка не втрачає вигляд навіть без мережі. */
+function imgTag(p) {
+  var ph = photo(p.g, p.id).replace(/'/g, '%27');
+  return '<img src="' + productImage(p) + '" alt="' + esc(p.t) + '" loading="lazy" width="400" height="400"' +
+    ' onerror="this.onerror=null;this.src=\'' + ph + '\'">';
+}
+
+/* ----------------------------------------------------------------- 4. STATE */
+var STORE_KEY = 'fake-rozetka:v2';
+var state = { cart: {}, fav: {}, compare: {}, city: 'Київ', lang: 'ua' };
+function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
+function load() {
+  try {
+    var s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if (s) {
+      state.cart = s.cart || {}; state.fav = s.fav || {};
+      state.compare = s.compare || {}; state.city = s.city || 'Київ'; state.lang = s.lang || 'ua';
+    }
+  } catch (e) {}
+}
+function byId(id) { for (var i = 0; i < PRODUCTS.length; i++) if (PRODUCTS[i].id === +id) return PRODUCTS[i]; return null; }
+function count(o) { return Object.keys(o).filter(function (k) { return o[k] > 0; }).length; }
+function cartTotal() {
+  return Object.keys(state.cart).reduce(function (s, id) { var p = byId(id); return p ? s + p.p * state.cart[id] : s; }, 0);
+}
+
+/* --------------------------------------------------------- 5. RENDER: LAYOUT */
+function renderSideNav() {
+  $('#sideNav').innerHTML = CATS.map(function (c) {
+    return '<a href="' + catLink(c) + '" class="' + (c.active ? 'is-active' : '') + '">' +
+      ico(c.icon, 'i--20 i-fill') + '<span>' + esc(c.t) + '</span></a>';
+  }).join('');
+  $('#sideSocials').innerHTML = SOCIALS.map(function (s) {
+    return '<a href="' + s[1] + '" aria-label="' + s[0] + '">' + ico(s[0], 'i--20') + '</a>';
+  }).join('');
+}
+
+function renderHero() {
+  $('#hero').innerHTML =
+    '<div class="hero__track" id="heroTrack">' + SLIDES.map(function (s) {
+      return '<div class="hero__slide" style="background:' + s.bg + '">' +
+        '<svg class="hero__art" viewBox="0 0 520 200" fill="none" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">' +
+        '<rect x="300" y="20" width="110" height="160" rx="22" fill="rgba(255,255,255,.22)"/>' +
+        '<rect x="190" y="55" width="90" height="125" rx="18" fill="rgba(255,255,255,.16)"/>' +
+        '<circle cx="440" cy="60" r="52" fill="rgba(255,255,255,.14)"/>' +
+        '</svg>' +
+        '<div class="hero__content">' +
+        '<span class="hero__eyebrow">' + esc(s.eyebrow) + '</span>' +
+        '<h2>' + esc(s.title) + '</h2>' +
+        '<p class="hero__lead">' + esc(s.lead) + '</p>' +
+        '<a class="hero__cta" href="' + s.href + '">' + esc(s.cta) + ico('i-right', 'i--18') + '</a>' +
+        '</div></div>';
+    }).join('') + '</div>' +
+    '<button class="hero__arrow hero__arrow--prev" data-slide-prev aria-label="Попередній банер">' + ico('i-left', 'i--20') + '</button>' +
+    '<button class="hero__arrow hero__arrow--next" data-slide-next aria-label="Наступний банер">' + ico('i-right', 'i--20') + '</button>' +
+    '<div class="hero__dots" id="heroDots">' + SLIDES.map(function (_, i) {
+      return '<button class="hero__dot' + (i === 0 ? ' is-active' : '') + '" data-slide="' + i + '" aria-label="Банер ' + (i + 1) + '"></button>';
+    }).join('') + '</div>';
+}
+
+/* Картка товару — як на реальній сторінці: стара ціна червоним зверху,
+   поточна + іконка кошика, чіп бонусів, рядок доставки. */
+function cardHTML(p) {
+  var url = p.href || searchUrl(p.t);
+  return '<article class="card" data-card="' + p.id + '">' +
+    '<button class="card__fav' + (state.fav[p.id] ? ' is-on' : '') + '" data-fav="' + p.id + '" aria-label="У список бажань">' + ico('i-heart', 'i--20') + '</button>' +
+    '<a class="card__media" href="' + url + '" tabindex="-1">' + imgTag(p) + '</a>' +
+    '<a class="card__title" href="' + url + '">' + esc(p.t) + '</a>' +
+    '<div class="card__old">' + (p.o ? money(p.o) : '') + '</div>' +
+    '<div class="card__row"><span class="price">' + money(p.p) + '</span>' +
+    '<button class="card__cart' + (state.cart[p.id] ? ' is-in' : '') + '" data-add="' + p.id + '" aria-label="Додати в кошик">' + ico('i-cart', 'i--20') + '</button></div>' +
+    '<div class="card__chips"><span class="chip">+' + Math.min(5, p.bonus || 1) + '% бонусних ₴</span></div>' +
+    '<div class="card__delivery' + (p.deliv ? '' : ' is-off') + '">' + (p.deliv ? 'Безкоштовна доставка' : 'Доставка від 49 ₴') +
+    '<span class="smart">SMART</span></div>' +
+    '</article>';
+}
+
+function renderShelves() {
+  $('#shelf1').innerHTML = PRODUCTS.slice(0, 6).map(cardHTML).join('');
+  renderShelf2();
+}
+var shown = 12;
+function renderShelf2() {
+  $('#shelf2').innerHTML = PRODUCTS.slice(6, 6 + shown).map(cardHTML).join('');
+  $('#loadMore').style.display = (6 + shown) >= PRODUCTS.length ? 'none' : '';
+}
+
+function renderFooter() {
+  var first = '<div class="f-col">' +
+    '<h4>Ми в соціальних мережах</h4>' +
+    '<div class="socials">' + SOCIALS.map(function (s) {
+      return '<a href="' + s[1] + '" aria-label="' + s[0] + '">' + ico(s[0], 'i--20') + '</a>';
+    }).join('') + '</div>' +
+    '<h4 style="margin-top:18px">Скануйте QR-код та встановлюйте застосунки</h4>' +
+    '<div class="f-qr"><span class="f-qr__code"></span><span class="f-apps">' +
+    '<a class="badge-app" href="' + siteUrl('apps/') + '"><svg class="i"><use href="#i-apple"></use></svg><span>App Store<em>Завантажити в</em></span></a>' +
+    '<a class="badge-app" href="' + siteUrl('apps/') + '"><svg class="i"><use href="#i-play"></use></svg><span>Google Play<em>Завантажити в</em></span></a>' +
+    '</span></div></div>';
+  $('#footCols').innerHTML = first + FOOTER.map(function (col) {
+    return '<div class="f-col"><h4>' + esc(col.title) + '</h4><ul>' + col.links.map(function (l) {
+      return '<li><a href="' + siteUrl(l[1]) + '">' + esc(l[0]) + '</a></li>';
+    }).join('') + '</ul></div>';
+  }).join('');
+}
+
+function renderCatalog() {
+  $('#catalogBody').innerHTML = CATALOG.map(function (g) {
+    return '<div class="mega-title">' + ico(g.icon, 'i--20 i-fill') + esc(g.title) + '</div>' +
+      g.items.map(function (it) { return '<a class="mega-item" href="' + searchUrl(it) + '">' + esc(it) + '</a>'; }).join('');
+  }).join('');
+}
+function renderCities() {
+  $('#cityBody').innerHTML = CITIES.map(function (c) {
+    return '<button class="mega-item" data-city="' + esc(c) + '" style="width:100%;text-align:left">' + ico('i-pin', 'i--20') + esc(c) + '</button>';
+  }).join('');
+}
+
+/* -------------------------------------------------------- 6. RENDER: CART UI */
+function renderCart() {
+  var ids = Object.keys(state.cart).filter(function (id) { return state.cart[id] > 0; });
+  var body = $('#cartBody'), foot = $('#cartFoot');
+  if (!ids.length) {
+    body.innerHTML = '<div class="empty">' + ico('i-cart') + '<p>Кошик порожній</p><p style="font-size:12px;margin-top:6px">Додані товари зберігаються у цьому браузері</p></div>';
+    foot.innerHTML = '<a class="btn btn--green" href="' + siteUrl('') + '">Перейти до каталогу</a>';
+    return;
+  }
+  body.innerHTML = ids.map(function (id) {
+    var p = byId(id);
+    return '<div class="cart-line">' + imgTag(p) +
+      '<div style="flex:1;min-width:0"><b>' + esc(p.t) + '</b><span class="price">' + money(p.p) + '</span>' +
+      '<div class="qty"><button data-dec="' + id + '" aria-label="Менше">' + ico('i-minus', 'i--16') + '</button>' +
+      '<span>' + state.cart[id] + '</span>' +
+      '<button data-inc="' + id + '" aria-label="Більше">' + ico('i-plus', 'i--16') + '</button></div></div>' +
+      '<button class="rm" data-rm="' + id + '" aria-label="Видалити">' + ico('i-trash', 'i--18') + '</button></div>';
+  }).join('');
+  foot.innerHTML = '<div class="cart-total"><span>Разом</span><span class="price">' + money(cartTotal()) + '</span></div>' +
+    '<a class="btn btn--green" href="' + siteUrl('checkout/') + '">Оформити замовлення</a>' +
+    '<button class="btn btn--ghost" style="margin-top:8px;width:100%" data-close-drawers>Продовжити покупки</button>';
+}
+
+function renderBadges() {
+  [['[data-cart-count]', count(state.cart)], ['[data-compare-count]', count(state.compare)]].forEach(function (m) {
+    $$(m[0]).forEach(function (el) { el.textContent = m[1]; el.classList.toggle('hicon__badge--empty', m[1] === 0); });
+  });
+}
+function toast(text) {
+  var box = $('#toasts');
+  box.insertAdjacentHTML('beforeend', '<div class="toast">' + ico('i-check', 'i--20') + '<span>' + esc(text) + '</span></div>');
+  var el = box.lastElementChild;
+  setTimeout(function () { el.style.transition = 'opacity .3s'; el.style.opacity = '0'; }, 2200);
+  setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 2600);
+}
+function refreshCards() {
+  $$('[data-card]').forEach(function (card) {
+    var id = card.getAttribute('data-card');
+    var buy = $('[data-add]', card);
+    if (buy) buy.classList.toggle('is-in', !!state.cart[id]);
+    var fav = $('[data-fav]', card); if (fav) fav.classList.toggle('is-on', !!state.fav[id]);
+  });
+  renderBadges();
+}
+/* ---------------------------------------------------------- 7. INTERACTIONS */
+var overlay = $('#overlay');
+function openDrawer(id) {
+  closeDrawers();
+  var d = document.getElementById(id);
+  d.classList.add('is-on'); d.setAttribute('aria-hidden', 'false');
+  overlay.classList.add('is-on');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawers() {
+  $$('.drawer').forEach(function (d) { d.classList.remove('is-on'); d.setAttribute('aria-hidden', 'true'); });
+  overlay.classList.remove('is-on');
+  document.body.style.overflow = '';
+}
+overlay.addEventListener('click', closeDrawers);
+
+/* Банер */
+var slide = 0, timer = null;
+function goSlide(i) {
+  slide = (i + SLIDES.length) % SLIDES.length;
+  var track = $('#heroTrack');
+  if (track) track.style.transform = 'translateX(-' + (slide * 100) + '%)';
+  $$('.hero__dot').forEach(function (d, n) { d.classList.toggle('is-active', n === slide); });
+}
+function autoSlide() { clearInterval(timer); timer = setInterval(function () { goSlide(slide + 1); }, 6000); }
+var heroEl = $('#hero');
+heroEl.addEventListener('mouseenter', function () { clearInterval(timer); });
+heroEl.addEventListener('mouseleave', autoSlide);
+autoSlide();
+
+/* Пошук */
+var sInput = $('#searchInput'), sBox = $('#suggest');
+function hideSuggest() { sBox.hidden = true; sBox.innerHTML = ''; }
+function suggestItems(list) {
+  return list.map(function (p) {
+    return '<div class="sg-item" data-goto="' + (p.href || searchUrl(p.t)) + '">' + imgTag(p) +
+      '<div style="flex:1;min-width:0"><b>' + esc(p.t) + '</b><span>' + money(p.p) + '</span></div></div>';
+  }).join('');
+}
+function localSuggest(q) {
+  var s = q.trim().toLowerCase();
+  if (!s) return [];
+  return PRODUCTS.filter(function (p) { return p.t.toLowerCase().indexOf(s) > -1; }).slice(0, 6);
+}
+function allLink(q) { return '<a class="sg-all" href="' + searchUrl(q) + '">Показати всі результати для «' + esc(q) + '» →</a>'; }
+sInput.addEventListener('input', function () {
+  var q = sInput.value;
+  if (q.trim().length < 2) { hideSuggest(); return; }
+  var local = localSuggest(q);
+  sBox.innerHTML = local.length ? suggestItems(local) + allLink(q)
+    : '<div class="sg-item"><div><b>Нічого не знайдено локально</b><span>Натисніть Enter, щоб шукати на сайті →</span></div></div>';
+  sBox.hidden = false;
+  fetchRemoteProducts(q).then(function (remote) {
+    if (!remote || !remote.items || !remote.items.length) return;
+    sBox.innerHTML = suggestItems(remote.items.slice(0, 6).map(function (it) {
+      return { t: it.title || it.name, p: it.price || 0, g: 'default', id: it.id || 0 };
+    })) + allLink(q);
+  });
+});
+$('#searchForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var q = sInput.value.trim();
+  location.href = q ? searchUrl(q) : siteUrl('');
+  hideSuggest();
+});
+
+/* Делеговані кліки */
+document.addEventListener('click', function (e) {
+  var t = e.target, hit;
+  if (!t.closest) return;
+
+  if ((hit = t.closest('[data-goto]'))) { location.href = hit.getAttribute('data-goto'); hideSuggest(); return; }
+  if (!t.closest('.search')) hideSuggest();
+
+  if ((hit = t.closest('[data-add]'))) {
+    var id = hit.getAttribute('data-add');
+    state.cart[id] = (state.cart[id] || 0) + 1;
+    save(); refreshCards(); renderCart(); toast('Товар додано в кошик');
+    return;
+  }
+  if ((hit = t.closest('[data-inc]')) || (hit = t.closest('[data-dec]'))) {
+    var cid = hit.getAttribute('data-inc') || hit.getAttribute('data-dec');
+    state.cart[cid] = (state.cart[cid] || 0) + (hit.hasAttribute('data-inc') ? 1 : -1);
+    if (state.cart[cid] <= 0) delete state.cart[cid];
+    save(); refreshCards(); renderCart();
+    return;
+  }
+  if ((hit = t.closest('[data-rm]'))) { delete state.cart[hit.getAttribute('data-rm')]; save(); refreshCards(); renderCart(); toast('Товар видалено з кошика'); return; }
+  if ((hit = t.closest('[data-fav]'))) {
+    var fid = hit.getAttribute('data-fav');
+    if (state.fav[fid]) delete state.fav[fid]; else { state.fav[fid] = 1; toast('Додано до списку бажань'); }
+    save(); refreshCards(); return;
+  }
+
+  if (t.closest('[data-open-cart]')) { renderCart(); openDrawer('cartDrawer'); return; }
+  if (t.closest('[data-open-catalog]')) { openDrawer('catalogDrawer'); return; }
+  if (t.closest('[data-open-city]')) { openDrawer('cityDrawer'); return; }
+  if (t.closest('[data-close-drawers]')) { closeDrawers(); return; }
+  if (t.closest('[data-ai]')) { toast('Rozetka AI — демо-кнопка'); return; }
+
+  if ((hit = t.closest('[data-city]'))) {
+    state.city = hit.getAttribute('data-city'); save();
+    $$('[data-city-name]').forEach(function (n) { n.textContent = state.city; });
+    closeDrawers(); toast('Місто змінено: ' + state.city); return;
+  }
+  if ((hit = t.closest('[data-slide]'))) { goSlide(+hit.getAttribute('data-slide')); autoSlide(); return; }
+  if (t.closest('[data-slide-prev]')) { goSlide(slide - 1); autoSlide(); return; }
+  if (t.closest('[data-slide-next]')) { goSlide(slide + 1); autoSlide(); return; }
+});
+
+/* Показати ще */
+$('#loadMore').addEventListener('click', function () {
+  shown = Math.min(shown + 6, PRODUCTS.length);
+  renderShelf2();
+  if (6 + shown >= PRODUCTS.length) toast('Це всі товари в демо-каталозі');
+});
+
+/* Липка шапка + кнопка «догори» */
+var toTop = $('#toTop');
+window.addEventListener('scroll', function () {
+  var y = window.pageYOffset || document.documentElement.scrollTop;
+  toTop.classList.toggle('is-on', y > 600);
+  $('#hdr').classList.toggle('is-stuck', y > 8);
+}, { passive: true });
+toTop.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') { closeDrawers(); hideSuggest(); }
+  if (e.key === '/' && document.activeElement !== sInput) { e.preventDefault(); sInput.focus(); }
+});
+
+/* ---------------------------------------------------------------- 8. INIT */
+load();
+renderSideNav(); renderHero(); renderShelves(); renderFooter(); renderCatalog(); renderCities();
+renderCart(); renderBadges(); goSlide(0);
+
+window.RZ = { CONFIG: CONFIG, state: state, products: PRODUCTS, searchUrl: searchUrl, siteUrl: siteUrl, api: fetchRemoteProducts, toast: toast, cartTotal: cartTotal };
+})();
+
+</script>
+
+</body>
+</html>

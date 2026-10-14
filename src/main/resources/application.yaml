@@ -1,0 +1,23 @@
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+
+spring:
+  application:
+    name: notification_html_telegram_standalone_service
+
+  threads:
+    virtual:
+      enabled: true
+
+  # Render API errors (e.g. ResponseStatusException 400/404) as RFC 9457 Problem Details
+  mvc:
+    problemdetails:
+      enabled: true
+
+  config:
+    import:
+    - optional:file:.env[.properties]
+    - classpath:mongodb.yaml
+    - classpath:telegram.yaml
+    - classpath:management.yaml

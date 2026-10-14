@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+    id "com.github.ben-manes.versions" version "${githubBenManesVersion}"
+}
+
+group = "${buildGroup}"
+version = "${buildVersion}"
+description = "${buildDescription}"
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    // Telegram Bot API (most popular & actively maintained in 2026)
+    // https://github.com/pengrad/java-telegram-bot-api
+    implementation 'com.github.pengrad:java-telegram-bot-api:10.3.0'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}

@@ -1,0 +1,4 @@
+spring:
+  mongodb:
+    uri: ${MONGO_DB_URI:mongodb://localhost:27017/notification_db}
+    database: ${MONGO_DB_DATABASE:item_4_tg_app_db}

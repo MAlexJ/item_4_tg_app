@@ -1,0 +1,15 @@
+telegram:
+  bot:
+    token: ${TELEGRAM_BOT_TOKEN:}
+    # Numeric channel id (e.g. -1001234567890) or @username of the channel
+    channel-id: ${TELEGRAM_CHANNEL_ID:}
+    # Update types the bot subscribes to via long-polling.
+    # chat_member      -> status change of other users (join/leave) in the channel
+    # my_chat_member   -> the bot's own status change (added/removed as admin)
+    # message          -> private chat: /start and shared contacts (phone number)
+    # callback_query   -> vote button presses
+    allowed-updates:
+      - chat_member
+      - my_chat_member
+      - message
+      - callback_query
